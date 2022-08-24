@@ -46,4 +46,13 @@ public class MovimientoDinero {
         this.usuario = usuario;
     }
 
+    @Override
+    public String toString() {
+        return "MovimientoDinero{" +
+                "monto=" + monto +
+                ", concepto='" + concepto + '\'' +
+                ", tipoMovimiento='" + tipoMovimiento + '\'' +
+                ", usuario='" + usuario + '\'' +
+                '}';
+    }
 }

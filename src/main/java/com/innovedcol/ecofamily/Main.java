@@ -2,8 +2,6 @@ package com.innovedcol.ecofamily;
 
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Hola mundo!");
-
         //TEST//
 
         //Clase empleado:
@@ -15,6 +13,8 @@ public class Main {
         emp.setRol("Contador");
         emp.setEmpresaContratante("EcoFamily2");
         System.out.println(emp.toString()); //Cambios de datos.
+
+        
 
     }
 }
