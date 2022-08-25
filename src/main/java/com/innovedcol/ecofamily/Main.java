@@ -39,5 +39,18 @@ public class Main {
         // Se imprime la informacion completa con los cambios realizados
         System.out.println(mov);
 
+        //Clase empresa:
+        Empresa Emp= new Empresa("CAfe","Calle 98c #06-7","3015900465","1234");
+        System.out.println(Emp.toString());
+
+        //prueba de los setters:
+        Emp.setNombre("Panadería");
+        Emp.setDireccion("CAlle98_34-02");
+        Emp.setTelefono("30259066");
+        Emp.setNit("222999");
+        System.out.println(Emp.toString());
+
+
+
     }
 }
