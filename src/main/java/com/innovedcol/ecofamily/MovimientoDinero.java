@@ -11,7 +11,7 @@ public class MovimientoDinero {
         this.monto = monto;
         this.concepto = concepto;
         this.tipoMovimiento = tipoMovimiento;
-        this.usuario = usuario;
+        this.usuario = usuario; // TODO: Cambiar a Tipo Empleado
     }
 
     public double getMonto() {

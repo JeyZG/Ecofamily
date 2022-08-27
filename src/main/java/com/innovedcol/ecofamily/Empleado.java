@@ -2,15 +2,15 @@ package com.innovedcol.ecofamily;
 
 public class Empleado {
 
-    String nombre;
-    String correo;
-    String empresaContratante;
-    String rol;
+    private String nombre;
+    private String correo;
+    private String empresaContratante;
+    private String rol;
 
     public Empleado(String nombre, String correo, String empresaContratante, String rol) {
         this.nombre = nombre;
         this.correo = correo;
-        this.empresaContratante = empresaContratante;
+        this.empresaContratante = empresaContratante; // TODO: Cambiar a tipo Empresa
         this.rol = rol;
     }
 
@@ -46,8 +46,8 @@ public class Empleado {
         this.rol = rol;
     }
 
-    @java.lang.Override
-    public java.lang.String toString() {
+    @Override
+    public String toString() {
         return "Empleado{" +
                 "nombre='" + nombre + '\'' +
                 ", correo='" + correo + '\'' +

@@ -45,6 +45,7 @@ public class Main {
         System.out.println("-- TEST DE LA CLASE EMPRESA --");
         // Nueva instancia de clase Empresa: Se crea un objeto llamado Emp
         Empresa Emp = new Empresa("Cafe", "Calle 98c #06-7", "3015900465", "1234");
+
         // Se imprimen los datos iniciales del objeto Emp
         System.out.println("----------------------------------------\n");
         System.out.println("*** Llamado al metodo toString() de la clase Empresa con los datos iniciales");
