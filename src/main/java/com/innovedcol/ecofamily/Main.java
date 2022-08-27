@@ -6,6 +6,40 @@ public class Main {
     public static void main(String[] args) {
         //TEST//
 
+        Scanner sc = new Scanner(System.in);
+        int opcion = 4;
+
+        do {
+            System.out.println("\n========================================");
+            System.out.println("\t--------- MENU TESTER --------- ");
+            System.out.println("========================================");
+            System.out.println("1. Prueba clase Empresa");
+            System.out.println("2. Prueba clase Empleado");
+            System.out.println("3. Prueba clase MovimientoDinero");
+            System.out.println("4. Salir");
+            System.out.print("Seleccione una opcion para continuar: ");
+            opcion = sc.nextInt();
+
+
+            switch (opcion) {
+                case 1:
+                    testerEmpresa();
+                    break;
+                case 2:
+                    testerEmpleado();
+                    break;
+                case 3:
+                    testerMovimientoDinero();
+                    break;
+                case 4:
+                    break;
+                default:
+                    System.out.println("Error!! Opción incorrecta");
+            }
+        } while (opcion != 4);
+    }
+
+    private static void testerEmpresa() {
         //Clase Empresa:
         System.out.println("\n========================================");
         System.out.println("-- TEST DE LA CLASE EMPRESA --");
@@ -46,7 +80,9 @@ public class Main {
         // Se imprimen los datos modificados del objeto Emp
         System.out.println("\n*** Llamado al metodo toString() de la clase Empresa con los datos modificados");
         System.out.println(Emp.toString());
+    }
 
+    private static void testerEmpleado() {
         //Clase Empleado:
         System.out.println("\n========================================");
         System.out.println("-- TEST DE LA CLASE EMPLEADO --");
@@ -88,6 +124,9 @@ public class Main {
         // Se imprimen los datos modificados del objeto emp
         System.out.println("\n*** Llamado al metodo toString() de la clase Empleado con los datos modificados");
         System.out.println(emp.toString());
+    }
+
+    private static void testerMovimientoDinero() {
 
         //Clase MovimientoDinero:
         System.out.println("\n========================================");
@@ -142,7 +181,6 @@ public class Main {
         // Se imprimen los datos modificados del objeto mov
         System.out.println("\n*** Llamado al metodo toString() de la clase MovimientoDinero con los datos modificados");
         System.out.println(mov.toString());
-
 
     }
 }
