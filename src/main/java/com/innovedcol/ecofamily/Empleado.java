@@ -4,13 +4,13 @@ public class Empleado {
 
     private String nombre;
     private String correo;
-    private String empresaContratante;
+    private Empresa empresaContratante;
     private String rol;
 
-    public Empleado(String nombre, String correo, String empresaContratante, String rol) {
+    public Empleado(String nombre, String correo, Empresa empresaContratante, String rol) {
         this.nombre = nombre;
         this.correo = correo;
-        this.empresaContratante = empresaContratante; // TODO: Cambiar a tipo Empresa
+        this.empresaContratante = empresaContratante;
         this.rol = rol;
     }
 
@@ -30,11 +30,11 @@ public class Empleado {
         this.correo = correo;
     }
 
-    public String getEmpresaContratante() {
+    public Empresa getEmpresaContratante() {
         return empresaContratante;
     }
 
-    public void setEmpresaContratante(String empresaContratante) {
+    public void setEmpresaContratante(Empresa empresaContratante) {
         this.empresaContratante = empresaContratante;
     }
 
@@ -51,7 +51,7 @@ public class Empleado {
         return "Empleado{" +
                 "nombre='" + nombre + '\'' +
                 ", correo='" + correo + '\'' +
-                ", empresaContratante='" + empresaContratante + '\'' +
+                ", empresaContratante='" + empresaContratante.getNombre() + '\'' +
                 ", rol='" + rol + '\'' +
                 '}';
     }

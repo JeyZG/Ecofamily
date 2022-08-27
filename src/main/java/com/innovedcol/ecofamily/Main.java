@@ -3,11 +3,20 @@ package com.innovedcol.ecofamily;
 import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) {
-        //TEST//
 
+    // Definicion de una Empresa principal
+    static Empresa empresaPpal  = new Empresa("Ecofamily","Cra 59C # 51 - 2","6666666","789654123");
+    // Definicion de un Empleado administrado
+    static Empleado empleadoAdmin = new Empleado("Juan Esteban", "juanesteban@ecofamily.com",empresaPpal,"Admin");
+    // Definicion de un Empleado operario
+    static Empleado empleadoOper = new Empleado("Andrea", "andrea@ecofamily.com",empresaPpal,"Operario");
+
+    public static void main(String[] args) {
+
+
+        // Definicion de variable para el Scanner
         Scanner sc = new Scanner(System.in);
-        int opcion = 4;
+        int opcion = 4; // Variable que guardara las opciones del menu
 
         do {
             System.out.println("\n========================================");
@@ -88,7 +97,7 @@ public class Main {
         System.out.println("\n========================================");
         System.out.println("-- TEST DE LA CLASE EMPLEADO --");
         // Nueva instancia de clase Empleado: Se crea un objeto llamado emp
-        Empleado emp = new Empleado("Mario", "XXXX@gmail.com", "EcoFamily", "Almacenista");
+        Empleado emp = new Empleado("Mario", "XXXX@gmail.com", new Empresa("InnoveD Col","Cra 56 # 24-10","5555555","123456987"), "Almacenista");
 
         // Se imprimen los datos iniciales del objeto emp
         System.out.println("----------------------------------------\n");
@@ -103,7 +112,7 @@ public class Main {
         // Lectura del correo
         System.out.println("Correo del empleado: " + emp.getCorreo());
         // Lectura de la empresa contratante
-        System.out.println("Empresa contratante: " + emp.getEmpresaContratante());
+        System.out.println("Empresa contratante: " + emp.getEmpresaContratante().getNombre());
         // Lectura del rol
         System.out.println("Rol del empleado: " + emp.getRol());
 
@@ -117,7 +126,7 @@ public class Main {
         emp.setCorreo("cccc@gmail.com");
         System.out.println("Se cambió el correo...");
         // Modificacion de la empresa contratante
-        emp.setEmpresaContratante("EcoFamily2");
+        emp.setEmpresaContratante(empresaPpal);
         System.out.println("Se cambió la empresa contratante...");
         // Modificacion del rol
         emp.setRol("Contador");
@@ -133,7 +142,7 @@ public class Main {
         System.out.println("\n========================================");
         System.out.println("-- TEST DE LA CLASE MOVIMIENTODINERO --");
         // Nueva instancia de clase  MovimientoDinero: Se crea un objeto llamado mov
-        MovimientoDinero mov = new MovimientoDinero(20000, "Consignacion inicial", "consignacion", "Hellder");
+        MovimientoDinero mov = new MovimientoDinero(20000, "Consignacion inicial", "consignacion",empleadoAdmin);
 
         // Se imprimen los datos iniciales del objeto mov
         System.out.println("----------------------------------------\n");
@@ -150,7 +159,7 @@ public class Main {
         // Lectura del tipo de movimiento
         System.out.println("Tipo de movimiento: " + mov.getTipoMovimiento());
         // Lectura del usuario que realiza el movimiento
-        System.out.println("Rol del empleado: " + mov.getUsuario());
+        System.out.println("Usuario: " + mov.getUsuario().getNombre());
 
         //Prueba de los setters:
         System.out.println("----------------------------------------\n");
@@ -165,7 +174,7 @@ public class Main {
         mov.setTipoMovimiento("retiro");
         System.out.println("Se cambió el tipo de movimiento...");
         // Modificacion del usuario que realiza el movimiento
-        mov.setUsuario("Jeyson");
+        mov.setUsuario(empleadoOper);
         System.out.println("Se cambió el usuario que realiza el movimiento...");
         // Se imprimen los datos modificados del objeto mov
         System.out.println("\n*** Llamado al metodo toString() de la clase MovimientoDinero con los datos modificados");

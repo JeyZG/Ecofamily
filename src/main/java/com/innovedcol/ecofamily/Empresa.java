@@ -1,10 +1,10 @@
 package com.innovedcol.ecofamily;
 
 public class Empresa {
-    public String nombre=""; //encapsulamiento
-    public String direccion="";
-    public String telefono="";
-    public String nit="";
+    public String nombre; //encapsulamiento
+    public String direccion;
+    public String telefono;
+    public String nit;
 
     public Empresa(String nombre, String direccion, String telefono, String nit) {
         this.nombre = nombre;

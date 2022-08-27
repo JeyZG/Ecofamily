@@ -5,13 +5,13 @@ public class MovimientoDinero {
     private double monto;
     private String concepto;
     private String  tipoMovimiento;
-    private String usuario;
+    private Empleado usuario;
 
-    public MovimientoDinero(double monto, String concepto, String tipoMovimiento, String usuario) {
+    public MovimientoDinero(double monto, String concepto, String tipoMovimiento, Empleado usuario) {
         this.monto = monto;
         this.concepto = concepto;
         this.tipoMovimiento = tipoMovimiento;
-        this.usuario = usuario; // TODO: Cambiar a Tipo Empleado
+        this.usuario = usuario;
     }
 
     public double getMonto() {
@@ -38,11 +38,11 @@ public class MovimientoDinero {
         this.tipoMovimiento = tipoMovimiento;
     }
 
-    public String getUsuario() {
+    public Empleado getUsuario() {
         return usuario;
     }
 
-    public void setUsuario(String usuario) {
+    public void setUsuario(Empleado usuario) {
         this.usuario = usuario;
     }
 
@@ -52,7 +52,7 @@ public class MovimientoDinero {
                 "monto=" + monto +
                 ", concepto='" + concepto + '\'' +
                 ", tipoMovimiento='" + tipoMovimiento + '\'' +
-                ", usuario='" + usuario + '\'' +
+                ", usuario='" + usuario.getNombre() + '\'' +
                 '}';
     }
 }
