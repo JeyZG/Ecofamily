@@ -1,4 +1,4 @@
-package com.innovedcol.ecofamily;
+package com.innovedcol.ecofamily.Entidades;
 
 public class MovimientoDinero {
 

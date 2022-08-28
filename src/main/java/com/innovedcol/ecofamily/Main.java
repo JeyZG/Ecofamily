@@ -1,5 +1,9 @@
 package com.innovedcol.ecofamily;
 
+import com.innovedcol.ecofamily.Entidades.Empleado;
+import com.innovedcol.ecofamily.Entidades.Empresa;
+import com.innovedcol.ecofamily.Entidades.MovimientoDinero;
+
 import java.util.Scanner;
 
 public class Main {
