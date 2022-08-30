@@ -9,10 +9,13 @@ import java.util.ArrayList;
 @RestController
 public class EnterpriseController {
 
+    // Declaramos un objeto de tipo EnterpriseService
     EnterpriseService enterpriseService;
 
+    // Constructor
     public EnterpriseController() {
-        this.enterpriseService = new EnterpriseService(); // Inicializamos el servicio de empresas
+        // Inicializamos el servicio de empresas
+        this.enterpriseService = new EnterpriseService();
     }
 
     // Metodo para llamar al servicio que muestra el listado de empresas
