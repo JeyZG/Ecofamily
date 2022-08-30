@@ -1,6 +1,6 @@
 package com.innovedcol.ecofamily.controllers;
 
-import com.innovedcol.ecofamily.entities.Empresa;
+import com.innovedcol.ecofamily.entities.Enterprise;
 import com.innovedcol.ecofamily.services.EnterpriseService;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,25 +20,25 @@ public class EnterpriseController {
 
     // Metodo para llamar al servicio que muestra el listado de empresas
     @GetMapping("/enterprises")
-    public ArrayList<Empresa> EnterprisesList(){
+    public ArrayList<Enterprise> EnterprisesList(){
         return this.enterpriseService.getEnterprisesList();
     }
 
     // Metodo para llamar al servicio que crea una nueva empresa
     @PostMapping("/enterprises")
-    public String createEnterprise(@RequestBody Empresa e){
+    public String createEnterprise(@RequestBody Enterprise e){
         return this.enterpriseService.createEnterprise(e);
     }
 
     // Metodo para llamar al servicio que busca una empresa segun su index
     @GetMapping("/enterprises/{index}")
-    public Empresa searchEnterprise(@PathVariable("index") Integer index){
+    public Enterprise searchEnterprise(@PathVariable("index") Integer index){
         return this.enterpriseService.searchEnterprise(index);
     }
 
     // Metodo para llamar al servicio que actualiza la info de una empresa
     @PatchMapping("/enterprises/{index}")
-    public String updateEnterprise(@PathVariable("index") Integer index, @RequestBody Empresa e){
+    public String updateEnterprise(@PathVariable("index") Integer index, @RequestBody Enterprise e){
         return this.enterpriseService.updateEnterprise(index,e);
     }
 

@@ -1,6 +1,6 @@
 package com.innovedcol.ecofamily.controllers;
 
-import com.innovedcol.ecofamily.entities.Empleado;
+import com.innovedcol.ecofamily.entities.Employee;
 import com.innovedcol.ecofamily.services.EmployeeService;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,25 +20,25 @@ public class EmployeeController {
 
     // Metodo para llamar al servicio que muestra el listado de empleados
     @GetMapping("/users")
-    public ArrayList<Empleado> EmployeeList(){
+    public ArrayList<Employee> EmployeeList(){
         return this.employeeService.getEmployeesList();
     }
 
     // Metodo para llamar al servicio que crea un nuevo empleado
     @PostMapping("/users")
-    public String createEmployee(@RequestBody Empleado e){
+    public String createEmployee(@RequestBody Employee e){
         return this.employeeService.createEmployee(e);
     }
 
     // Metodo para llamar al servicio que busca un empleado segun su index
     @GetMapping("/user/{index}")
-    public Empleado searchEmployee(@PathVariable("index") Integer index){
+    public Employee searchEmployee(@PathVariable("index") Integer index){
         return this.employeeService.searchEmployee(index);
     }
 
     // Metodo para llamar al servicio que actualiza la info de un empleado
     @PatchMapping("/user/{index}")
-    public String updateEmployee(@PathVariable("index") Integer index, @RequestBody Empleado e){
+    public String updateEmployee(@PathVariable("index") Integer index, @RequestBody Employee e){
         return this.employeeService.updateEmployee(index,e);
     }
 
