@@ -1,8 +1,8 @@
 package com.innovedcol.ecofamily;
 
-import com.innovedcol.ecofamily.Entidades.Empleado;
-import com.innovedcol.ecofamily.Entidades.Empresa;
-import com.innovedcol.ecofamily.Entidades.MovimientoDinero;
+import com.innovedcol.ecofamily.entities.Empleado;
+import com.innovedcol.ecofamily.entities.Empresa;
+import com.innovedcol.ecofamily.entities.MovimientoDinero;
 
 import java.util.Scanner;
 
@@ -15,7 +15,7 @@ public class Main {
     // Definicion de un Empleado operario
     static Empleado empleadoOper = new Empleado("Andrea", "andrea@ecofamily.com",empresaPpal,"Operario");
 
-    public static void main(String[] args) {
+    public static void old_main(String[] args) {
 
 
         // Definicion de variable para el Scanner
