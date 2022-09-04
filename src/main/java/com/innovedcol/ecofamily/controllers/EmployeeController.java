@@ -2,7 +2,6 @@ package com.innovedcol.ecofamily.controllers;
 
 import com.innovedcol.ecofamily.entities.Employee;
 import com.innovedcol.ecofamily.services.EmployeeService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
@@ -14,7 +13,6 @@ public class EmployeeController {
     private final EmployeeService service;
 
     // Constructor
-    @Autowired
     public EmployeeController(EmployeeService service) {
         this.service = service;
     }
@@ -39,7 +37,7 @@ public class EmployeeController {
     }
 
     // Método para llamar al servicio que actualiza la info de un empleado
-    @PatchMapping("/user/{id}")
+    @PutMapping("/user/{id}")
     public String updateEmployee(@PathVariable("id") Long id, @RequestBody Employee e){
         return this.service.updateEmployee(id,e);
     }

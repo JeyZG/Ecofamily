@@ -2,7 +2,6 @@ package com.innovedcol.ecofamily.controllers;
 
 import com.innovedcol.ecofamily.entities.Transaction;
 import com.innovedcol.ecofamily.services.TransactionService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
@@ -14,7 +13,6 @@ public class TransactionController {
     TransactionService service;
 
     // Constructor
-    @Autowired
     public TransactionController(TransactionService service) {
         this.service = service;
     }
@@ -38,7 +36,7 @@ public class TransactionController {
     }
 
     // Método para llamar al servicio que actualiza la info de una transacción
-    @PatchMapping("/movements/{id}")
+    @PutMapping("/movements/{id}")
     public String updateTransaction(@PathVariable("id") Long id, @RequestBody Transaction t){
         return this.service.updateTransaction(id,t);
     }

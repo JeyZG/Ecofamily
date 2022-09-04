@@ -17,7 +17,7 @@ public class Profile {
     @Column(nullable = false)
     private String phone;
     @OneToOne
-    @JoinColumn(nullable = false)
+    @JoinColumn(nullable = true)
     private Employee user;
     @Column(nullable = false)
     private Calendar createdAt;

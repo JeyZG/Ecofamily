@@ -17,7 +17,7 @@ public class Employee {
     @Column(nullable = false, unique = true)
     private String email;
     @OneToOne
-    @JoinColumn(nullable = false)
+    @JoinColumn(nullable = true)
     private Profile profile;
     @Column(nullable = false)
     private String role;
@@ -25,8 +25,8 @@ public class Employee {
     @JoinColumn(nullable = false)
     private Enterprise enterprise;
     @OneToMany(cascade= {CascadeType.ALL})
-    @JoinColumn(nullable = true)
-    private ArrayList<Transaction> transactions;
+    @Column(nullable = true)
+    private List<Transaction> transactions;
     @Column(nullable = false)
     private Calendar createdAt;
     @Column(nullable = false)
@@ -99,7 +99,7 @@ public class Employee {
         this.enterprise = enterprise;
     }
 
-    public ArrayList<Transaction> getTransactions() {
+    public List<Transaction> getTransactions() {
         return transactions;
     }
 

@@ -2,7 +2,6 @@ package com.innovedcol.ecofamily.controllers;
 
 import com.innovedcol.ecofamily.entities.Profile;
 import com.innovedcol.ecofamily.services.ProfileService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -15,7 +14,6 @@ public class ProfileController {
     ProfileService service;
 
     // Constructor
-    @Autowired
     public ProfileController(ProfileService service) {
         this.service = service;
     }
@@ -39,7 +37,7 @@ public class ProfileController {
     }
 
     // Método para llamar al servicio que actualiza la info de un perfil
-    @PatchMapping("/profiles/{id}")
+    @PutMapping("/profiles/{id}")
     public String updateProfile(@PathVariable("id") String id, @RequestBody Profile p){
         return this.service.updateProfile(id,p);
     }

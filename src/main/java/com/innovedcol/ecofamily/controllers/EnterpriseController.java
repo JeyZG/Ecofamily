@@ -2,7 +2,6 @@ package com.innovedcol.ecofamily.controllers;
 
 import com.innovedcol.ecofamily.entities.Enterprise;
 import com.innovedcol.ecofamily.services.EnterpriseService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
@@ -14,7 +13,6 @@ public class EnterpriseController {
     private final EnterpriseService service;
 
     // Constructor
-    @Autowired
     public EnterpriseController(EnterpriseService service) {
         this.service = service;
     }
