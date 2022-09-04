@@ -1,50 +1,53 @@
 package com.innovedcol.ecofamily.controllers;
 
 import com.innovedcol.ecofamily.entities.Employee;
+import com.innovedcol.ecofamily.entities.Enterprise;
 import com.innovedcol.ecofamily.services.EmployeeService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
+import java.util.*;
 
 @RestController
 public class EmployeeController {
 
     // Declaramos un objeto de tipo EmployeeService
-    EmployeeService employeeService;
+    private final EmployeeService service;
 
     // Constructor
-    public EmployeeController() {
-        // Inicializamos el servicio de empleados
-        this.employeeService = new EmployeeService();
+    @Autowired
+    public EmployeeController(EmployeeService service) {
+        this.service = service;
     }
 
     // Metodo para llamar al servicio que muestra el listado de empleados
     @GetMapping("/users")
     public ArrayList<Employee> EmployeeList(){
-        return this.employeeService.getEmployeesList();
+        return this.service.getEmployeesList();
     }
 
     // Metodo para llamar al servicio que crea un nuevo empleado
     @PostMapping("/users")
     public String createEmployee(@RequestBody Employee e){
-        return this.employeeService.createEmployee(e);
+        return this.service.createEmployee(e);
     }
 
+
     // Metodo para llamar al servicio que busca un empleado segun su index
-    @GetMapping("/user/{index}")
-    public Employee searchEmployee(@PathVariable("index") Integer index){
-        return this.employeeService.searchEmployee(index);
+    @GetMapping("/user/{id}")
+    public Optional<Employee> searchEmployee(@PathVariable("id") Long id){
+        return this.service.searchEmployee(id);
     }
 
     // Metodo para llamar al servicio que actualiza la info de un empleado
-    @PatchMapping("/user/{index}")
-    public String updateEmployee(@PathVariable("index") Integer index, @RequestBody Employee e){
-        return this.employeeService.updateEmployee(index,e);
+    @PatchMapping("/user/{id}")
+    public String updateEmployee(@PathVariable("id") Long id, @RequestBody Employee e){
+        return this.service.updateEmployee(id,e);
     }
 
     // Metodo para llamar al servicio que eliminar un empleado
-    @DeleteMapping("/user/{index}")
-    public String deleteEmployee(@PathVariable("index") Integer index){
-        return this.employeeService.deleteEmployee(index);
+    @DeleteMapping("/user/{id}")
+    public String deleteEmployee(@PathVariable("id") Long id){
+        return this.service.deleteEmployee(id);
     }
 }

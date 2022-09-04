@@ -4,8 +4,7 @@ import com.innovedcol.ecofamily.entities.Enterprise;
 import com.innovedcol.ecofamily.repositories.EnterpriseRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class EnterpriseService {
@@ -35,13 +34,14 @@ public class EnterpriseService {
 
     // Metodo que actualiza la informacion de una empresa segun su id. Retorna un mensaje
     public String updateEnterprise(Long id, Enterprise e){
+        //TODO: Completar esta parte del codigo
         return "--> La empresa" + e.getName() + " fue actualizada satisfactoriamente!";
     }
 
-    // Metodo que elimina una empresa del listado. Retorna un mensaje
+    // Metodo que elimina una empresa de la base de datos. Retorna un mensaje
     public String deleteEnterprise(Long id){
         repository.deleteById(id);
-        return "--> La empresa seleccionada fue eliminada satisfactoriamente!";
+        return "--> La empresa con ID: " + id + " fue eliminada satisfactoriamente!";
     }
 
 }

@@ -7,6 +7,7 @@ import java.util.*;
 @Table(name = "Enterprise")
 public class Enterprise {
 
+    // Atributos
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(unique = true)
@@ -20,11 +21,11 @@ public class Enterprise {
     @Column(nullable = false)
     private String address;
     @OneToMany(cascade= {CascadeType.ALL})
-    @JoinColumn(name = "users", nullable = true)
-    private List<Employee> listEmployees;
+    @JoinColumn(nullable = true)
+    private List<Employee> users;
     @OneToMany(cascade= {CascadeType.ALL})
-    @Column(name = "transactions", nullable = true)
-    private List<Transaction> listTransactions;
+    @Column(nullable = true)
+    private List<Transaction> transactions;
     @Column(nullable = false)
     private Calendar createdAt;
     @Column(nullable = false)
@@ -35,19 +36,19 @@ public class Enterprise {
     }
 
     // Constructor completo
-
-
-    public Enterprise(Long id, String name, String document, String phone, String address, List<Employee> listEmployees, List<Transaction> listTransactions, Calendar createdAt, Calendar updatedAt) {
+    public Enterprise(Long id, String name, String document, String phone, String address, List<Employee> users, List<Transaction> transactions, Calendar createdAt, Calendar updatedAt) {
         this.id = id;
         this.name = name;
         this.document = document;
         this.phone = phone;
         this.address = address;
-        this.listEmployees = listEmployees;
-        this.listTransactions = listTransactions;
+        this.users = users;
+        this.transactions = transactions;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
     }
+
+    // Getters and setters
 
     public Long getId() {
         return id;
@@ -89,20 +90,20 @@ public class Enterprise {
         this.address = address;
     }
 
-    public List<Employee> getListEmployees() {
-        return listEmployees;
+    public List<Employee> getUsers() {
+        return users;
     }
 
-    public void setListEmployees(List<Employee> listEmployees) {
-        this.listEmployees = listEmployees;
+    public void setUsers(List<Employee> listEmployees) {
+        this.users = listEmployees;
     }
 
-    public List<Transaction> getListTransactions() {
-        return listTransactions;
+    public List<Transaction> getTransactions() {
+        return transactions;
     }
 
-    public void setListTransactions(List<Transaction> listTransactions) {
-        this.listTransactions = listTransactions;
+    public void setTransactions(List<Transaction> listTransactions) {
+        this.transactions = listTransactions;
     }
 
     public Calendar getCreatedAt() {
@@ -129,8 +130,8 @@ public class Enterprise {
                 ", document='" + document + '\'' +
                 ", phone='" + phone + '\'' +
                 ", address='" + address + '\'' +
-                ", listEmployees=" + listEmployees +
-                ", listTransactions=" + listTransactions +
+                ", users=" + users +
+                ", transactions=" + transactions +
                 ", createdAt=" + createdAt +
                 ", updatedAt=" + updatedAt +
                 '}';

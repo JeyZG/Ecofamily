@@ -1,63 +1,128 @@
 package com.innovedcol.ecofamily.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.*;
 
+@Entity
+@Table(name = "Employee")
 public class Employee {
 
-    private String nombre;
-    private String correo;
-    private Enterprise enterpriseContratante;
-    private String rol;
+    // Atributos
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(unique = true)
+    private Long id;
+    @Column(nullable = false, unique = true)
+    private String email;
+    @OneToOne
+    @JoinColumn(nullable = false)
+    private Profile profile;
+    @Column(nullable = false)
+    private String role;
+    @ManyToOne
+    @JoinColumn(nullable = false)
+    private Enterprise enterprise;
+    @OneToMany(cascade= {CascadeType.ALL})
+    @JoinColumn(nullable = true)
+    private ArrayList<Transaction> transactions;
+    @Column(nullable = false)
+    private Calendar createdAt;
+    @Column(nullable = false)
+    private Calendar updatedAt;
 
-    @Entity
-    @Table(name = "Employee")
-    public Employee(String nombre, String correo, Enterprise enterpriseContratante, String rol) {
-        this.nombre = nombre;
-        this.correo = correo;
-        this.enterpriseContratante = enterpriseContratante;
-        this.rol = rol;
+    // Constructor vacio
+    public Employee() {
     }
 
-    public String getNombre() {
-        return nombre;
+    // Constructor completo
+    public Employee(Long id, String email, Profile profile, String role, Enterprise enterprise, ArrayList<Transaction> transactions, Calendar createdAt, Calendar updatedAt) {
+        this.id = id;
+        this.email = email;
+        this.profile = profile;
+        this.role = role;
+        this.enterprise = enterprise;
+        this.transactions = transactions;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    // Getters and setters
+
+    public Long getId() {
+        return id;
     }
 
-    public String getCorreo() {
-        return correo;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public void setCorreo(String correo) {
-        this.correo = correo;
+    public String getEmail() {
+        return email;
     }
 
-    public Enterprise getEmpresaContratante() {
-        return enterpriseContratante;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public void setEmpresaContratante(Enterprise enterpriseContratante) {
-        this.enterpriseContratante = enterpriseContratante;
+    public Profile getProfile() {
+        return profile;
     }
 
-    public String getRol() {
-        return rol;
+    public void setProfile(Profile profile) {
+        this.profile = profile;
     }
 
-    public void setRol(String rol) {
-        this.rol = rol;
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    public Enterprise getEnterprise() {
+        return enterprise;
+    }
+
+    public void setEnterprise(Enterprise enterprise) {
+        this.enterprise = enterprise;
+    }
+
+    public ArrayList<Transaction> getTransactions() {
+        return transactions;
+    }
+
+    public void setTransactions(ArrayList<Transaction> transactions) {
+        this.transactions = transactions;
+    }
+
+    public Calendar getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Calendar createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public Calendar getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(Calendar updatedAt) {
+        this.updatedAt = updatedAt;
     }
 
     @Override
     public String toString() {
-        return "Employee {" +
-                "nombre = '" + nombre + '\'' +
-                ", correo = '" + correo + '\'' +
-                ", enterpriseContratante = '" + enterpriseContratante.getName() + '\'' +
-                ", rol = '" + rol + '\'' +
+        return "Employee{" +
+                "id=" + id +
+                ", email='" + email + '\'' +
+                ", profile=" + profile +
+                ", role='" + role + '\'' +
+                ", enterprise=" + enterprise +
+                ", transactions=" + transactions +
+                ", createdAt=" + createdAt +
+                ", updatedAt=" + updatedAt +
                 '}';
     }
 }
