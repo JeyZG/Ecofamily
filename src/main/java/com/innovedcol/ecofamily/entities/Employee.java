@@ -1,5 +1,8 @@
 package com.innovedcol.ecofamily.entities;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
 public class Employee {
 
     private String nombre;
@@ -7,6 +10,8 @@ public class Employee {
     private Enterprise enterpriseContratante;
     private String rol;
 
+    @Entity
+    @Table(name = "Employee")
     public Employee(String nombre, String correo, Enterprise enterpriseContratante, String rol) {
         this.nombre = nombre;
         this.correo = correo;
@@ -51,7 +56,7 @@ public class Employee {
         return "Employee {" +
                 "nombre = '" + nombre + '\'' +
                 ", correo = '" + correo + '\'' +
-                ", enterpriseContratante = '" + enterpriseContratante.getNombre() + '\'' +
+                ", enterpriseContratante = '" + enterpriseContratante.getName() + '\'' +
                 ", rol = '" + rol + '\'' +
                 '}';
     }

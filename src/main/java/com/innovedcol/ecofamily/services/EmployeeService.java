@@ -1,7 +1,6 @@
 package com.innovedcol.ecofamily.services;
 
 import com.innovedcol.ecofamily.entities.Employee;
-import com.innovedcol.ecofamily.entities.Enterprise;
 
 import java.util.ArrayList;
 
@@ -19,12 +18,12 @@ public class EmployeeService {
 
     // Metodo para cargar datos iniciales de los empleados
     public void datosIniciales(){
-        employeesList.add(new Employee("Catalina Taborda","catalina@ecofamily.com",enterpriseService.getEnterprises(0),"Admin"));
-        employeesList.add(new Employee("Alejandra Moreano","alejandra@ecofamily.com",enterpriseService.getEnterprises(0),"Operario"));
-        employeesList.add(new Employee("Carlos Mora","carlos@automantec.com",enterpriseService.getEnterprises(1),"Admin"));
-        employeesList.add(new Employee("Alexander Carvajal","alexander@automantec.com",enterpriseService.getEnterprises(1),"Operario"));
-        employeesList.add(new Employee("Matthew Zuñiga","matthew@jzgdevelopers.com",enterpriseService.getEnterprises(2),"Admin"));
-        employeesList.add(new Employee("Juan Zuñiga","juan@jzgdevelopers.com",enterpriseService.getEnterprises(2),"Operario"));
+        employeesList.add(new Employee("Catalina Taborda","catalina@ecofamily.com",enterpriseService.searchEnterprise(0),"Admin"));
+        employeesList.add(new Employee("Alejandra Moreano","alejandra@ecofamily.com",enterpriseService.searchEnterprise(0),"Operario"));
+        employeesList.add(new Employee("Carlos Mora","carlos@automantec.com",enterpriseService.searchEnterprise(1),"Admin"));
+        employeesList.add(new Employee("Alexander Carvajal","alexander@automantec.com",enterpriseService.searchEnterprise(1),"Operario"));
+        employeesList.add(new Employee("Matthew Zuñiga","matthew@jzgdevelopers.com",enterpriseService.searchEnterprise(2),"Admin"));
+        employeesList.add(new Employee("Juan Zuñiga","juan@jzgdevelopers.com",enterpriseService.searchEnterprise(2),"Operario"));
     }
 
     // Metodo que retorna un objeto de tipo empleado segun su index
