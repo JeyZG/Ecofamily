@@ -12,6 +12,8 @@ public class Employee {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(unique = true)
     private Long id;
+    @Column(nullable = false)
+    private String name;
     @Column(nullable = false, unique = true)
     private String email;
     @OneToOne
@@ -35,8 +37,9 @@ public class Employee {
     }
 
     // Constructor completo
-    public Employee(Long id, String email, Profile profile, String role, Enterprise enterprise, ArrayList<Transaction> transactions, Calendar createdAt, Calendar updatedAt) {
+    public Employee(Long id, String name, String email, Profile profile, String role, Enterprise enterprise, ArrayList<Transaction> transactions, Calendar createdAt, Calendar updatedAt) {
         this.id = id;
+        this.name = name;
         this.email = email;
         this.profile = profile;
         this.role = role;
@@ -54,6 +57,14 @@ public class Employee {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getEmail() {
@@ -116,6 +127,7 @@ public class Employee {
     public String toString() {
         return "Employee{" +
                 "id=" + id +
+                ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
                 ", profile=" + profile +
                 ", role='" + role + '\'' +

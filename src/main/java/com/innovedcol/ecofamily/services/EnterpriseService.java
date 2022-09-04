@@ -16,32 +16,32 @@ public class EnterpriseService {
         this.repository = repository;
     }
 
-    // Metodo que retorna un arraylist con el listado de las empresas
+    // Método que retorna un arraylist con el listado de las empresas
     public ArrayList<Enterprise> getEnterprisesList(){
         return (ArrayList<Enterprise>) repository.findAll();
     }
 
-    // Metodo que retorna un objeto de tipo Enterprise segun su ID
+    // Método que retorna un objeto de tipo Enterprise según su ID
     public Optional<Enterprise> searchEnterprise(Long id){
         return repository.findById(id);
     }
 
-    // Metodo que crea una empresa y la añade a la base de datos. Retorna un mensaje
+    // Método que crea una empresa y la añade a la base de datos. Retorna un mensaje
     public String createEnterprise(Enterprise e){
         repository.save(e);
         return "--> La empresa " + e.getName() + " fue creada satisfactoriamente!";
     }
 
-    // Metodo que actualiza la informacion de una empresa segun su id. Retorna un mensaje
+    // Método que actualiza la informacion de una empresa según su id. Retorna un mensaje
     public String updateEnterprise(Long id, Enterprise e){
         //TODO: Completar esta parte del codigo
         return "--> La empresa" + e.getName() + " fue actualizada satisfactoriamente!";
     }
 
-    // Metodo que elimina una empresa de la base de datos. Retorna un mensaje
+    // Método que elimina una empresa de la base de datos. Retorna un mensaje
     public String deleteEnterprise(Long id){
         repository.deleteById(id);
-        return "--> La empresa con ID: " + id + " fue eliminada satisfactoriamente!";
+        return "--> La empresa con ID " + id + " fue eliminada satisfactoriamente!";
     }
 
 }
