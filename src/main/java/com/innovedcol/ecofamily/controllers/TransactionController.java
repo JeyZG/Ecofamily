@@ -31,7 +31,7 @@ public class TransactionController {
         return this.service.createTransaction(t);
     }
 
-    // Método para llamar al servicio que busca una transacción según su index
+    // Método para llamar al servicio que busca una transacción según su id
     @GetMapping("/movements/{id}")
     public Optional<Transaction> searchTransaction(@PathVariable("id") Long id){
         return this.service.searchTransaction(id);

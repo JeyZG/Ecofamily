@@ -24,7 +24,7 @@ public class Profile {
     @Column(nullable = false)
     private Calendar updatedAt;
 
-    // Constructor vacio
+    // Constructor vacío
     public Profile() {
     }
 
