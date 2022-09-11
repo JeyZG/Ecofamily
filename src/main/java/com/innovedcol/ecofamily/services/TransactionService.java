@@ -4,8 +4,7 @@ import com.innovedcol.ecofamily.entities.Transaction;
 import com.innovedcol.ecofamily.repositories.TransactionRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class TransactionService {
