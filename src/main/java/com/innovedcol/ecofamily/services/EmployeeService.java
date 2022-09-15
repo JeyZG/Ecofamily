@@ -3,30 +3,75 @@ package com.innovedcol.ecofamily.services;
 import com.innovedcol.ecofamily.entities.Employee;
 import com.innovedcol.ecofamily.repositories.EmployeeRepository;
 import com.innovedcol.ecofamily.repositories.EnterpriseRepository;
-import com.innovedcol.ecofamily.repositories.ProfileRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.util.ReflectionUtils;
 
-import java.lang.reflect.Field;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 @Service
+@AllArgsConstructor
 public class EmployeeService {
 
-    // Definimos un atributo de tipo repositorio
+    // Definimos atributos de los repositorios para hacer inyeccion de dependencias
     private final EmployeeRepository employeeRepository;
-    private final ProfileRepository profileRepository;
     private final EnterpriseRepository enterpriseRepository;
 
-    // Constructor
-    public EmployeeService(EmployeeRepository employeeRepository, ProfileRepository profileRepository, EnterpriseRepository enterpriseRepository) {
-        this.employeeRepository = employeeRepository;
-        this.profileRepository = profileRepository;
-        this.enterpriseRepository = enterpriseRepository;
+    // Constructor creado con la anotacion de la linea 11
+
+    // Metodo que retorna una lista de empleados
+    public List<Employee> employeesList() {
+        return employeeRepository.findAll();
     }
 
+    // Método que retorna un objeto de tipo Employee según su ID
+    public Optional<Employee> searchEmployee(Long id) {
+        return employeeRepository.findById(id);
+    }
+
+    // Método que retorna los empleados por su nombre y su empresa (filtrado)
+    public Optional<Employee> employeeByEnterprise(String nombre, Long idEmpresa){
+        if(nombre != null){
+            return employeeRepository.findByName(nombre);
+        }
+        if (idEmpresa != null){
+            return employeeRepository.findByEnterprise(idEmpresa);
+        }
+        return Optional.empty();
+    }
+
+    // Método que crea un empleado y la añade a la base de datos. Retorna un objeto de tipo Employee
+    public Employee createEmployee(Long enterprise_id, Employee e) {
+        try {
+            return enterpriseRepository.findById(enterprise_id).map(ent -> {
+                e.setEnterprise(ent);
+                return employeeRepository.save(e);
+            }).get();
+        } catch (Exception ex) {
+            System.out.println("Error = " + ex);
+            return null;
+        }
+    }
+
+    // Método que actualiza la informacion de un empleado según su id. Retorna un mensaje
+    public Employee updateEmployee(Long id, Employee e){
+        if(searchEmployee(id).isPresent()){
+            return employeeRepository.save(e);
+        }else{
+            return null;
+        }
+    }
+
+    // Método que elimina un empleado de la base de datos. Retorna un mensaje
+    public String deleteEmployee(Long id) {
+        if(searchEmployee(id).isPresent()){
+            employeeRepository.deleteById(id);
+            return "--> El empleado se eliminó correctamente!";
+        }else{
+            return "--> El empleado indicado no existe!";
+        }
+    }
+
+    /*
     // Metodo que retorna una lista de empleados
     public ArrayList<Employee> employeesList() {
         return (ArrayList<Employee>) employeeRepository.findAll();
@@ -108,6 +153,5 @@ public class EmployeeService {
 
     }
 
-
-
+*/
 }

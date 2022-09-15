@@ -37,7 +37,7 @@ public class EnterpriseController {
 
     // Método para llamar al servicio que actualiza la info de una empresa
     @PutMapping("/enterprises/{id}")
-    public String updateEnterprise(@PathVariable("id") Long id, @RequestBody Enterprise e){
+    public Enterprise updateEnterprise(@PathVariable("id") Long id, @RequestBody Enterprise e){
         return this.service.updateEnterprise(id,e);
     }
 

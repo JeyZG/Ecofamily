@@ -33,8 +33,9 @@ public class Transaction {
     //@JsonIgnore
     // TODO: OK segun el video del 14/09/22
     @ManyToOne
-    @JoinColumn(name = "user")
-    private Employee user;
+    @JoinColumn(name = "employee")
+    @JsonIgnore
+    private Employee employee;
 
     // TODO: Se cambiaron estas relaciones hoy 12/09
     //@ManyToOne(fetch=FetchType.LAZY, optional = false)
@@ -42,6 +43,7 @@ public class Transaction {
     // TODO: OK segun el video del 14/09/22
     @ManyToOne
     @JoinColumn(name = "enterprise")
+    @JsonIgnore
     private Enterprise enterprise;
 
     @Enumerated(EnumType.STRING)

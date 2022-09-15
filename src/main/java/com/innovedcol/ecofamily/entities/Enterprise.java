@@ -45,7 +45,6 @@ public class Enterprise {
     // TODO: OK segun el video del 14/09/22
     @OneToMany(mappedBy="enterprise")
     @Column(name="transactions", nullable = true)
-    //@JsonIgnore
     public Set<Transaction> transactions;
     //private List<Transaction> transactions;
 

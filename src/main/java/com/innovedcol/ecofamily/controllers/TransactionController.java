@@ -37,7 +37,7 @@ public class TransactionController {
 
     // Método para llamar al servicio que actualiza la info de una transacción
     @PutMapping("/movements/{id}")
-    public String updateTransaction(@PathVariable("id") Long id, @RequestBody Transaction t){
+    public Transaction updateTransaction(@PathVariable("id") Long id, @RequestBody Transaction t){
         return this.service.updateTransaction(id,t);
     }
 

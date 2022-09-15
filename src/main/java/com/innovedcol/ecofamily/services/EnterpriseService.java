@@ -33,9 +33,12 @@ public class EnterpriseService {
     }
 
     // Método que actualiza la informacion de una empresa según su id. Retorna un mensaje
-    public String updateEnterprise(Long id, Enterprise e){
-        //TODO: Completar esta parte del codigo
-        return "--> La empresa" + e.getName() + " fue actualizada satisfactoriamente!";
+    public Enterprise updateEnterprise(Long id, Enterprise e){
+        if(searchEnterprise(id).isPresent()){
+            return repository.save(e);
+        }else{
+            return null;
+        }
     }
 
     // Método que elimina una empresa de la base de datos. Retorna un mensaje

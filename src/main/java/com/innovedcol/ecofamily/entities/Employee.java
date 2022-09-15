@@ -48,7 +48,7 @@ public class Employee {
     // TODO: Se cambiaron estas relaciones hoy 12/09
     //@OneToMany(mappedBy="employee", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     // TODO: OK segun el video del 14/09/22
-    @OneToMany(mappedBy= "user")
+    @OneToMany(mappedBy= "employee")
     public Set<Transaction> transactions;
     //private List<Transaction> transactions;
 

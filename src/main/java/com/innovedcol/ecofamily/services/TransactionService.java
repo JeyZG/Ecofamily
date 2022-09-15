@@ -1,6 +1,7 @@
 package com.innovedcol.ecofamily.services;
 
 
+import com.innovedcol.ecofamily.entities.Enterprise;
 import com.innovedcol.ecofamily.entities.Transaction;
 import com.innovedcol.ecofamily.repositories.EmployeeRepository;
 import com.innovedcol.ecofamily.repositories.EnterpriseRepository;
@@ -42,7 +43,7 @@ public class TransactionService {
         */
         try {
             employeeRepository.findById(user_id).map(usr -> {
-                t.setUser(usr);
+                t.setEmployee(usr);
                 return usr;
             });
             return enterpriseRepository.findById(enterprise_id).map(ent -> {
@@ -56,10 +57,14 @@ public class TransactionService {
     }
 
     // Método que actualiza la información de una transacción según su id. Retorna un mensaje
-    public String updateTransaction(Long id, Transaction t){
-        //TODO: Completar esta parte del codigo
-        return "--> La transacción con ID " + t.getId() + " fue actualizada satisfactoriamente!";
+    public Transaction updateTransaction(Long id, Transaction t){
+        if(searchTransaction(id).isPresent()){
+            return transactionRepository.save(t);
+        }else{
+            return null;
+        }
     }
+
 
     // Método que elimina una transacción de la base de datos. Retorna un mensaje
     public String deleteTransaction(Long id){
