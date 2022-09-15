@@ -23,7 +23,7 @@ public class ProfileService {
     }
 
     // Método que retorna un objeto de tipo Profile según su ID
-    public Optional<Profile> searchProfile(String id){
+    public Optional<Profile> searchProfile(Long id){
         return repository.findById(id);
     }
 
@@ -40,7 +40,7 @@ public class ProfileService {
     }
 
     // Método que elimina una transacción de la base de datos. Retorna un mensaje
-    public String deleteProfile(String id){
+    public String deleteProfile(Long id){
         repository.deleteById(id);
         return "--> El perfil con ID " + id + " fue eliminado satisfactoriamente!";
     }

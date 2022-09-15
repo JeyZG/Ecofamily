@@ -1,22 +1,23 @@
 package com.innovedcol.ecofamily.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
 import java.util.*;
 
-@Entity
-@AllArgsConstructor
+
 @NoArgsConstructor
+@AllArgsConstructor
 @Getter
 @Setter
-@ToString
-@Table(name = "Enterprise")
+@Entity
+@Table(name = "enterprise")
 public class Enterprise {
 
     // Atributos
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(unique = true)
     private Long id;
 
@@ -32,17 +33,28 @@ public class Enterprise {
     @Column(nullable = false)
     private String address;
 
-    @OneToMany(cascade= {CascadeType.ALL}, mappedBy="enterprise")
-    @JoinColumn(nullable = false)
-    private List<Employee> users;
+    // TODO: Se cambiaron estas relaciones hoy 12/09
+    //@OneToMany(mappedBy="enterprise", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 
-    @OneToMany(cascade= {CascadeType.ALL}, mappedBy="enterprise")
-    @Column(nullable = false)
-    private List<Transaction> transactions;
+    @OneToMany(mappedBy="enterprise")
+    @Column(name="employees")
+    @JsonIgnore
+    public Set<Employee> employees;
 
-    @Column(nullable = false)
-    private Calendar createdAt;
+    // TODO: Se cambiaron estas relaciones hoy 12/09
+    //@OneToMany(mappedBy="enterprise", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 
+    @OneToMany(mappedBy="enterprise")
+    @Column(name="transactions", nullable = true)
+    //@JsonIgnore
+    public Set<Transaction> transactions;
+    //private List<Transaction> transactions;
+
+    @Temporal(TemporalType.DATE)
     @Column(nullable = false)
-    private Calendar updatedAt;
+    private Date createdAt;
+
+    @Temporal(TemporalType.DATE)
+    @Column(nullable = true)
+    private Date updatedAt;
 }

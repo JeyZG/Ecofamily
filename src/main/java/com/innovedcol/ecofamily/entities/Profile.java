@@ -1,23 +1,24 @@
 package com.innovedcol.ecofamily.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
 import java.util.*;
 
-@Entity
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Getter
 @Setter
-@ToString
-@Table(name = "Profile")
+@Entity
+@Table(name = "profile")
 public class Profile {
 
     // Atributos
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id;
+    @Column(unique = true)
+    private Long id;
 
     @Column(nullable = false)
     private String image;
@@ -25,14 +26,16 @@ public class Profile {
     @Column(nullable = false)
     private String phone;
 
-    @OneToOne(cascade = {CascadeType.ALL})
-    @JoinColumn(nullable = false)
-    private Employee user;
+    @OneToOne(mappedBy = "profile")
+    @JsonIgnore
+    private Employee employee;
 
+    @Temporal(TemporalType.DATE)
     @Column(nullable = false)
-    private Calendar createdAt;
+    private Date createdAt;
 
-    @Column(nullable = false)
-    private Calendar updatedAt;
+    @Temporal(TemporalType.DATE)
+    @Column(nullable = true)
+    private Date updatedAt;
 
 }

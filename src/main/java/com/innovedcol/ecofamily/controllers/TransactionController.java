@@ -24,9 +24,9 @@ public class TransactionController {
     }
 
     // Método para llamar al servicio que crea una nueva transacción
-    @PostMapping("/movements")
-    public String createTransaction(@RequestBody Transaction t){
-        return this.service.createTransaction(t);
+    @PostMapping("/movements/{usr_id}/{ent_id}")
+    public Transaction createTransaction(@PathVariable("usr_id") Long usr_id, @PathVariable("ent_id") Long ent_id, @RequestBody Transaction t){
+        return this.service.createTransaction(usr_id, ent_id,t);
     }
 
     // Método para llamar al servicio que busca una transacción según su id

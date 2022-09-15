@@ -32,7 +32,7 @@ public class ProfileController {
 
     // Método para llamar al servicio que busca un perfil según su id
     @GetMapping("/profiles/{id}")
-    public Optional<Profile> searchProfile(@PathVariable("id") String id){
+    public Optional<Profile> searchProfile(@PathVariable("id") Long id){
         return this.service.searchProfile(id);
     }
 
@@ -44,7 +44,7 @@ public class ProfileController {
 
     // Método para llamar al servicio que eliminar un perfil
     @DeleteMapping("/profiles/{id}")
-    public String deleteProfile(@PathVariable("id") String id){
+    public String deleteProfile(@PathVariable("id") Long id){
         return this.service.deleteProfile(id);
     }
 }
