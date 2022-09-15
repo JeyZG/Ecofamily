@@ -36,21 +36,13 @@ public class Employee {
     @Column(nullable = false)
     private String image;
 
-    //@ManyToOne(fetch=FetchType.LAZY, optional = false)
-    //@JsonIgnore
-    // TODO: Se cambiaron estas relaciones hoy 12/09
-    // TODO: OK segun el video del 14/09/22
     @ManyToOne
     @JoinColumn(name = "enterprise")
     @JsonIgnore
     private Enterprise enterprise;
 
-    // TODO: Se cambiaron estas relaciones hoy 12/09
-    //@OneToMany(mappedBy="employee", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    // TODO: OK segun el video del 14/09/22
     @OneToMany(mappedBy= "employee")
     public Set<Transaction> transactions;
-    //private List<Transaction> transactions;
 
     @Temporal(TemporalType.DATE)
     @Column(nullable = false)
