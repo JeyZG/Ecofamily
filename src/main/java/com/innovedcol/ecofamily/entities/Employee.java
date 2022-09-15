@@ -27,16 +27,15 @@ public class Employee {
     @Column(nullable = false, unique = true)
     private String email;
 
-    // TODO: Se cambiaron estas relaciones hoy 12/09
-    @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY, orphanRemoval = true)
-    //@JoinColumn(name = "profile", nullable = false)
-    @JoinColumn(name = "profile", referencedColumnName = "id", nullable = false)
-    @JsonIgnore
-    private Profile profile;
+    @Column(nullable = false)
+    private String phone;
 
     @Enumerated(EnumType.STRING)
     @Column(name="role", nullable = false)
     private EnumRoleEmployee role;
+
+    @Column(nullable = false)
+    private String image;
 
     //@ManyToOne(fetch=FetchType.LAZY, optional = false)
     //@JsonIgnore
