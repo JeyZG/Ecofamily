@@ -1,6 +1,7 @@
 package com.innovedcol.ecofamily.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.innovedcol.ecofamily.enums.EnumTypeTransaction;
 import lombok.*;
 
 import javax.persistence.*;
@@ -11,7 +12,7 @@ import java.util.Date;
 @Getter
 @Setter
 @Entity
-@Table(name = "transaction")
+@Table(name = "TRANSACTIONS")
 public class Transaction {
 
     // Atributos
@@ -30,22 +31,22 @@ public class Transaction {
     //@ManyToOne(fetch=FetchType.LAZY, optional = false)
     //@JoinColumn(name = "employee_id", referencedColumnName = "id", nullable = false)
     //@JsonIgnore
+    // TODO: OK segun el video del 14/09/22
     @ManyToOne
-    @JoinColumn(name = "employee", referencedColumnName = "id", nullable = false)
-    @JsonIgnore
-    private Employee employee;
+    @JoinColumn(name = "user")
+    private Employee user;
 
     // TODO: Se cambiaron estas relaciones hoy 12/09
     //@ManyToOne(fetch=FetchType.LAZY, optional = false)
     //@JoinColumn(name = "enterprise_id", referencedColumnName = "id", nullable = false)
-
+    // TODO: OK segun el video del 14/09/22
     @ManyToOne
-    @JoinColumn(name = "enterprise", referencedColumnName = "id", nullable = false)
-    @JsonIgnore
+    @JoinColumn(name = "enterprise")
     private Enterprise enterprise;
 
-    @Column(nullable = false)
-    private String type;
+    @Enumerated(EnumType.STRING)
+    @Column(name="type", nullable = false)
+    private EnumTypeTransaction type;
 
     @Temporal(TemporalType.DATE)
     @Column(nullable = false)

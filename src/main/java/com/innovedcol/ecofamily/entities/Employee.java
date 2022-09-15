@@ -12,13 +12,12 @@ import java.util.*;
 @Getter
 @Setter
 @Entity
-@Table(name = "employee")
+@Table(name = "EMPLOYEES")
 public class Employee {
 
     // Atributos
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(unique = true)
     private Long id;
 
     @Column(nullable = false, unique = true)
@@ -40,16 +39,16 @@ public class Employee {
     //@ManyToOne(fetch=FetchType.LAZY, optional = false)
     //@JsonIgnore
     // TODO: Se cambiaron estas relaciones hoy 12/09
+    // TODO: OK segun el video del 14/09/22
     @ManyToOne
-    @JoinColumn(name = "enterprise", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "enterprise")
     @JsonIgnore
     private Enterprise enterprise;
 
     // TODO: Se cambiaron estas relaciones hoy 12/09
     //@OneToMany(mappedBy="employee", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @OneToMany(mappedBy="employee",cascade = CascadeType.ALL,fetch = FetchType.LAZY, orphanRemoval = true)
-    @Column(name = "transactions", nullable = true)
-    @JsonIgnore
+    // TODO: OK segun el video del 14/09/22
+    @OneToMany(mappedBy= "user")
     public Set<Transaction> transactions;
     //private List<Transaction> transactions;
 

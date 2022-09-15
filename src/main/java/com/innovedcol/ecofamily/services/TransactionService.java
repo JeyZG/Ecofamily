@@ -42,7 +42,7 @@ public class TransactionService {
         */
         try {
             employeeRepository.findById(user_id).map(usr -> {
-                t.setEmployee(usr);
+                t.setUser(usr);
                 return usr;
             });
             return enterpriseRepository.findById(enterprise_id).map(ent -> {

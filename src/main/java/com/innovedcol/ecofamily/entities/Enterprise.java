@@ -12,7 +12,7 @@ import java.util.*;
 @Getter
 @Setter
 @Entity
-@Table(name = "enterprise")
+@Table(name = "ENTERPRISES")
 public class Enterprise {
 
     // Atributos
@@ -35,15 +35,14 @@ public class Enterprise {
 
     // TODO: Se cambiaron estas relaciones hoy 12/09
     //@OneToMany(mappedBy="enterprise", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-
+    // TODO: OK segun el video del 14/09/22
     @OneToMany(mappedBy="enterprise")
     @Column(name="employees")
-    @JsonIgnore
     public Set<Employee> employees;
 
     // TODO: Se cambiaron estas relaciones hoy 12/09
     //@OneToMany(mappedBy="enterprise", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-
+    // TODO: OK segun el video del 14/09/22
     @OneToMany(mappedBy="enterprise")
     @Column(name="transactions", nullable = true)
     //@JsonIgnore
