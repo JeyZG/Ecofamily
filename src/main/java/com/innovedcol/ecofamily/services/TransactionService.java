@@ -35,12 +35,8 @@ public class TransactionService {
         return transactionRepository.findById(id);
     }
 
-    //TODO: Modificar como sé hizo con la creacion de un nuevo empleado, por las relaciones
     // Método que crea una transacción y la añade a la base de datos. Retorna un mensaje
     public Transaction createTransaction(Long user_id, Long enterprise_id, Transaction t){
-        /*transactionRepository.save(t);
-        return "--> La transacción con ID " + t.getId() + " fue creada satisfactoriamente!";
-        */
         try {
             employeeRepository.findById(user_id).map(usr -> {
                 t.setEmployee(usr);
@@ -65,11 +61,9 @@ public class TransactionService {
         }
     }
 
-
     // Método que elimina una transacción de la base de datos. Retorna un mensaje
     public String deleteTransaction(Long id){
         transactionRepository.deleteById(id);
         return "--> La transacción con ID " + id + " fue eliminada satisfactoriamente!";
     }
-
 }
