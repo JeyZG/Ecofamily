@@ -5,7 +5,9 @@ import com.innovedcol.ecofamily.repositories.EmployeeRepository;
 import com.innovedcol.ecofamily.repositories.EnterpriseRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ReflectionUtils;
 
+import java.lang.reflect.Field;
 import java.util.*;
 
 @Service
@@ -51,12 +53,26 @@ public class EmployeeService {
             return null;
         }
     }
-
+    /*
     // Método que actualiza la informacion de un empleado según su id. Retorna un mensaje
     public Employee updateEmployee(Long id, Employee e){
         if(searchEmployee(id).isPresent()){
             return employeeRepository.save(e);
         }else{
+            return null;
+        }
+    }
+    */
+    public Employee updateEmployee(Long id, Map<Object, Object> employeeMap) {
+        if (searchEmployee(id).isPresent()) {
+            Employee empleado = employeeRepository.findById(id).get();
+            employeeMap.forEach((key, value) -> {
+                Field campo = ReflectionUtils.findField(Employee.class, (String) key);
+                campo.setAccessible(true);
+                ReflectionUtils.setField(campo, empleado, value);
+            });
+            return employeeRepository.save(empleado);
+        } else {
             return null;
         }
     }

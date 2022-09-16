@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.*;
 
 @RestController
-@RequestMapping("/users")
 public class EmployeeController {
 
     // Declaramos un objeto de tipo EmployeeService
@@ -20,7 +19,7 @@ public class EmployeeController {
     }
 
     // Método para llamar al servicio que muestra el listado de empleados
-    @GetMapping
+    @GetMapping("/users")
     public ResponseEntity<List<Employee>> employeeList() {
         List<Employee> empleados = service.employeesList();
         if (empleados.isEmpty()) {
@@ -30,7 +29,7 @@ public class EmployeeController {
         }
     }
     // Método para llamar al servicio que busca un empleado según su id
-    @GetMapping("/{id}")
+    @GetMapping("/user/{id}")
     public ResponseEntity<Employee> searchEmployee(@PathVariable Long id){
         Optional<Employee> empleado = service.searchEmployee(id);
         if (empleado.isPresent()) {
@@ -41,19 +40,20 @@ public class EmployeeController {
     }
 
     // Método para llamar al servicio que crea un nuevo empleado en una empresa establecida
-    @PostMapping("/{ent_id}")
+    @PostMapping("/users/{ent_id}")
     public Employee createEmployee(@PathVariable("ent_id") Long ent_id,@RequestBody Employee e){
         return this.service.createEmployee(ent_id,e);
     }
 
     // Método para llamar al servicio que actualiza la info de un empleado segun su ID
-    @PutMapping("/{id}")
-    public Employee updateEmployee(@PathVariable("id") Long id, @RequestBody Employee e){
-        return this.service.updateEmployee(id,e);
+    @PatchMapping("/user/{id}")
+    //public Employee updateEmployee(@PathVariable("id") Long id, @RequestBody Employee e){
+    public Employee updateEmployee(@PathVariable("id") Long id, @RequestBody Map<Object, Object> employeeMap){
+        return this.service.updateEmployee(id, employeeMap);
     }
 
     // Método para llamar al servicio que eliminar un empleado segun su ID
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/user/{id}")
     public String deleteEmployee(@PathVariable("id") Long id){
         return this.service.deleteEmployee(id);
     }
