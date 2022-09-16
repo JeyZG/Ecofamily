@@ -16,6 +16,8 @@ public class EmployeeService {
     private final EmployeeRepository employeeRepository;
     private final EnterpriseRepository enterpriseRepository;
 
+    private final EnterpriseService service_ent;
+
     // Constructor creado con la anotacion @AllArgsConstructor
 
     // Metodo que retorna una lista de empleados
@@ -42,7 +44,16 @@ public class EmployeeService {
     // Método que crea un empleado y la añade a la base de datos. Retorna un objeto de tipo Employee
     //TODO: Verificar que pasa si no encuentra la empresa.
     public Employee createEmployee(Long enterprise_id, Employee e) {
+        /*if (service_ent.searchEnterprise(enterprise_id).isPresent()){
+            return enterpriseRepository.findById(enterprise_id).map(ent -> {
+                e.setEnterprise(ent);
+                return employeeRepository.save(e);
+            }).get();
+        }else {
+            return null;
+        }*/
         try {
+
             return enterpriseRepository.findById(enterprise_id).map(ent -> {
                 e.setEnterprise(ent);
                 return employeeRepository.save(e);

@@ -1,7 +1,9 @@
 package com.innovedcol.ecofamily.entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.innovedcol.ecofamily.enums.EnumRoleEmployee;
 import lombok.*;
 
@@ -13,6 +15,7 @@ import java.util.*;
 @Getter
 @Setter
 @Entity
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,property="id")
 @Table(name = "EMPLOYEES")
 public class Employee {
 
@@ -37,16 +40,16 @@ public class Employee {
     @Column(nullable = false)
     private String image;
 
-    @JsonBackReference(value="enterprise_employee")
     @ManyToOne(fetch=FetchType.LAZY, optional = false)
-    @JoinColumn(name = "enterprise")
-    //@JsonIgnore
+    @JoinColumn(name = "enterprise", nullable = true)
+    @JsonBackReference
     private Enterprise enterprise;
 
-    @JsonManagedReference
-    @OneToMany(mappedBy= "employee", targetEntity = Transaction.class, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    //@OneToMany(mappedBy= "employee", targetEntity = Transaction.class, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy= "employee", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @Column(name="transactions", nullable = true)
-    public Set<Transaction> transactions;
+    @JsonManagedReference
+    private Set<Transaction> transactions;
 
     @Temporal(TemporalType.DATE)
     @Column(nullable = false)
@@ -55,5 +58,6 @@ public class Employee {
     @Temporal(TemporalType.DATE)
     @Column(nullable = true)
     private Date updatedAt;
+
 
 }

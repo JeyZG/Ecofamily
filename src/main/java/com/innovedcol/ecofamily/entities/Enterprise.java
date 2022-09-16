@@ -1,6 +1,8 @@
 package com.innovedcol.ecofamily.entities;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.*;
 
 import javax.persistence.*;
@@ -12,6 +14,7 @@ import java.util.*;
 @Getter
 @Setter
 @Entity
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,property="id")
 @Table(name = "ENTERPRISES")
 public class Enterprise {
 
@@ -33,15 +36,18 @@ public class Enterprise {
     @Column(nullable = false)
     private String address;
 
-    @JsonManagedReference
-    @OneToMany(mappedBy="enterprise", targetEntity = Employee.class, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @Column(name="employees")
-    public Set<Employee> employees;
 
+    //@OneToMany(mappedBy="enterprise", targetEntity = Employee.class, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy="enterprise", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @Column(name="employees")
     @JsonManagedReference
-    @OneToMany(mappedBy="enterprise", targetEntity = Transaction.class, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<Employee> employees;
+
+    //@OneToMany(mappedBy="enterprise", targetEntity = Transaction.class, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy="enterprise", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @Column(name="transactions", nullable = true)
-    public Set<Transaction> transactions;
+    @JsonManagedReference
+    private Set<Transaction> transactions;
 
     @Temporal(TemporalType.DATE)
     @Column(nullable = false)
@@ -50,4 +56,6 @@ public class Enterprise {
     @Temporal(TemporalType.DATE)
     @Column(nullable = true)
     private Date updatedAt;
+
+
 }
