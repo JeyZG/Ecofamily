@@ -1,6 +1,7 @@
 package com.innovedcol.ecofamily.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.innovedcol.ecofamily.enums.EnumRoleEmployee;
 import lombok.*;
 
@@ -36,12 +37,15 @@ public class Employee {
     @Column(nullable = false)
     private String image;
 
-    @ManyToOne
+    @JsonBackReference(value="enterprise_employee")
+    @ManyToOne(fetch=FetchType.LAZY, optional = false)
     @JoinColumn(name = "enterprise")
-    @JsonIgnore
+    //@JsonIgnore
     private Enterprise enterprise;
 
-    @OneToMany(mappedBy= "employee")
+    @JsonManagedReference
+    @OneToMany(mappedBy= "employee", targetEntity = Transaction.class, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @Column(name="transactions", nullable = true)
     public Set<Transaction> transactions;
 
     @Temporal(TemporalType.DATE)

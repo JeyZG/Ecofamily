@@ -41,7 +41,7 @@ public class EmployeeController {
     }
 
     // Método para llamar al servicio que crea un nuevo empleado en una empresa establecida
-    @PostMapping("/users/{ent_id}")
+    @PostMapping(value="/users/{ent_id}")
     public Employee createEmployee(@PathVariable("ent_id") Long ent_id,@RequestBody Employee e){
         return this.service.createEmployee(ent_id,e);
     }

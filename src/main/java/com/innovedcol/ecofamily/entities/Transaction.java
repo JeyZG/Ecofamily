@@ -1,5 +1,6 @@
 package com.innovedcol.ecofamily.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.innovedcol.ecofamily.enums.EnumTypeTransaction;
 import lombok.*;
@@ -27,14 +28,16 @@ public class Transaction {
     @Column(nullable = false)
     private double amount;
 
-    @ManyToOne
+    @JsonBackReference(value="employee_transaction")
+    @ManyToOne(fetch=FetchType.LAZY, optional = false)
     @JoinColumn(name = "employee")
-    @JsonIgnore
+    //@JsonIgnore
     private Employee employee;
 
-    @ManyToOne
+    @JsonBackReference(value="enterprise_transaction")
+    @ManyToOne(fetch=FetchType.LAZY, optional = false)
     @JoinColumn(name = "enterprise")
-    @JsonIgnore
+    //@JsonIgnore
     private Enterprise enterprise;
 
     @Enumerated(EnumType.STRING)

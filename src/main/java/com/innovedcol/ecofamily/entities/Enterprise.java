@@ -1,5 +1,6 @@
 package com.innovedcol.ecofamily.entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
 import javax.persistence.*;
@@ -32,11 +33,13 @@ public class Enterprise {
     @Column(nullable = false)
     private String address;
 
-    @OneToMany(mappedBy="enterprise")
+    @JsonManagedReference
+    @OneToMany(mappedBy="enterprise", targetEntity = Employee.class, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @Column(name="employees")
     public Set<Employee> employees;
 
-    @OneToMany(mappedBy="enterprise")
+    @JsonManagedReference
+    @OneToMany(mappedBy="enterprise", targetEntity = Transaction.class, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @Column(name="transactions", nullable = true)
     public Set<Transaction> transactions;
 

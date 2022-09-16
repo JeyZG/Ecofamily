@@ -24,7 +24,7 @@ public class TransactionController {
     }
 
     // Método para llamar al servicio que crea una nueva transacción
-    @PostMapping("/movements/{usr_id}/{ent_id}")
+    @PostMapping(value="/movements/{usr_id}/{ent_id}")
     public Transaction createTransaction(@PathVariable("usr_id") Long usr_id, @PathVariable("ent_id") Long ent_id, @RequestBody Transaction t){
         return this.service.createTransaction(usr_id, ent_id,t);
     }
@@ -38,6 +38,11 @@ public class TransactionController {
     // Método para llamar al servicio que actualiza la info de una transacción
     @PutMapping("/movements/{id}")
     public Transaction updateTransaction(@PathVariable("id") Long id, @RequestBody Transaction t){
+        return this.service.updateTransaction(id,t);
+    }
+
+    @PatchMapping("/movements/{id}")
+    public Transaction updateTransaction2(@PathVariable("id") Long id, @RequestBody Transaction t){
         return this.service.updateTransaction(id,t);
     }
 
