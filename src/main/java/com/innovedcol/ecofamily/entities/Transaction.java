@@ -27,11 +27,20 @@ public class Transaction {
     @Column(nullable = false)
     private double amount;
 
+    // TODO: Se cambiaron estas relaciones hoy 12/09
+    //@ManyToOne(fetch=FetchType.LAZY, optional = false)
+    //@JoinColumn(name = "employee_id", referencedColumnName = "id", nullable = false)
+    //@JsonIgnore
+    // TODO: OK segun el video del 14/09/22
     @ManyToOne
     @JoinColumn(name = "employee")
     @JsonIgnore
     private Employee employee;
 
+    // TODO: Se cambiaron estas relaciones hoy 12/09
+    //@ManyToOne(fetch=FetchType.LAZY, optional = false)
+    //@JoinColumn(name = "enterprise_id", referencedColumnName = "id", nullable = false)
+    // TODO: OK segun el video del 14/09/22
     @ManyToOne
     @JoinColumn(name = "enterprise")
     @JsonIgnore
