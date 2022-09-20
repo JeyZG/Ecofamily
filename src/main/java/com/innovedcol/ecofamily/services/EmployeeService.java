@@ -5,9 +5,7 @@ import com.innovedcol.ecofamily.repositories.EmployeeRepository;
 import com.innovedcol.ecofamily.repositories.EnterpriseRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.util.ReflectionUtils;
 
-import java.lang.reflect.Field;
 import java.util.*;
 
 @Service
@@ -30,16 +28,6 @@ public class EmployeeService {
         return employeeRepository.findById(id);
     }
 
-    // Método que retorna los empleados por su nombre y su empresa (filtrado)
-    public Optional<Employee> employeeByEnterprise(String nombre, Long idEmpresa){
-        if(nombre != null){
-            return employeeRepository.findByName(nombre);
-        }
-        if (idEmpresa != null){
-            return employeeRepository.findByEnterprise(idEmpresa);
-        }
-        return Optional.empty();
-    }
 
     // Método que crea un empleado y la añade a la base de datos. Retorna un objeto de tipo Employee
     public Employee createEmployee(Long enterprise_id, Employee e) {
@@ -53,7 +41,7 @@ public class EmployeeService {
             return null;
         }
     }
-    /*
+
     // Método que actualiza la informacion de un empleado según su id. Retorna un mensaje
     public Employee updateEmployee(Long id, Employee e){
         if(searchEmployee(id).isPresent()){
@@ -62,21 +50,48 @@ public class EmployeeService {
             return null;
         }
     }
-    */
+    /*
     public Employee updateEmployee(Long id, Map<Object, Object> employeeMap) {
         if (searchEmployee(id).isPresent()) {
             Employee empleado = employeeRepository.findById(id).get();
             employeeMap.forEach((key, value) -> {
-                Field campo = ReflectionUtils.findField(Employee.class, (String) key);
-                campo.setAccessible(true);
-                ReflectionUtils.setField(campo, empleado, value);
+                try{
+
+                    Field campo = ReflectionUtils.findField(Employee.class, (String) key);
+                    System.out.println(value.getClass());
+                    campo.setAccessible(true);
+                    switch (key.toString()){
+                        case "id":
+                            ReflectionUtils.setField(campo, empleado, (Long) value);
+                            break;
+                        case "transactions":
+                            ReflectionUtils.setField(campo, empleado, (ArrayList<Transaction>)value);
+                            break;
+                        case "enterprise":
+                            ReflectionUtils.setField(campo, empleado, (ArrayList<Enterprise>)value);
+                            break;
+                        case "role":
+                            ReflectionUtils.setField(campo, empleado, (EnumRoleEmployee) value);
+                            break;
+                        case "name":
+                        case "email":
+                        case "phone":
+                        case "image":
+                            ReflectionUtils.setField(campo, empleado, value);
+                        break;
+                    }
+                    ReflectionUtils.setField(campo, empleado, value);
+                }catch (Exception e){
+                    System.out.println(value.getClass() + " | Error | " + value.toString());
+                }
+
             });
             return employeeRepository.save(empleado);
         } else {
             return null;
         }
     }
-
+    */
     // Método que elimina un empleado de la base de datos. Retorna un mensaje
     public String deleteEmployee(Long id) {
         if(searchEmployee(id).isPresent()){

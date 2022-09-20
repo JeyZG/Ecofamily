@@ -32,11 +32,7 @@ public class EmployeeController {
     @GetMapping("/user/{id}")
     public ResponseEntity<Employee> searchEmployee(@PathVariable Long id){
         Optional<Employee> empleado = service.searchEmployee(id);
-        if (empleado.isPresent()) {
-            return ResponseEntity.ok(empleado.get());
-        }else {
-            return ResponseEntity.notFound().build();
-        }
+        return empleado.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     // Método para llamar al servicio que crea un nuevo empleado en una empresa establecida
@@ -47,9 +43,10 @@ public class EmployeeController {
 
     // Método para llamar al servicio que actualiza la info de un empleado segun su ID
     @PatchMapping("/user/{id}")
-    //public Employee updateEmployee(@PathVariable("id") Long id, @RequestBody Employee e){
-    public Employee updateEmployee(@PathVariable("id") Long id, @RequestBody Map<Object, Object> employeeMap){
-        return this.service.updateEmployee(id, employeeMap);
+    public Employee updateEmployee(@PathVariable("id") Long id, @RequestBody Employee e){
+    //public Employee updateEmployee(@PathVariable("id") Long id, @RequestBody Map<Object, Object> employeeMap){
+        //return this.service.updateEmployee(id, employeeMap);
+        return this.service.updateEmployee(id, e);
     }
 
     // Método para llamar al servicio que eliminar un empleado segun su ID
