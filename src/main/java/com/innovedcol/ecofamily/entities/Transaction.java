@@ -3,15 +3,18 @@ package com.innovedcol.ecofamily.entities;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.innovedcol.ecofamily.enums.EnumTypeTransaction;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDateTime;
 
-@NoArgsConstructor
+@Entity
 @AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Setter
-@Entity
+@ToString
 @Table(name = "TRANSACTIONS")
 public class Transaction {
 
@@ -27,34 +30,26 @@ public class Transaction {
     @Column(nullable = false)
     private double amount;
 
-    // TODO: Se cambiaron estas relaciones hoy 12/09
-    //@ManyToOne(fetch=FetchType.LAZY, optional = false)
-    //@JoinColumn(name = "employee_id", referencedColumnName = "id", nullable = false)
-    //@JsonIgnore
-    // TODO: OK segun el video del 14/09/22
     @ManyToOne
     @JoinColumn(name = "employee")
     @JsonIgnore
     private Employee employee;
 
-    // TODO: Se cambiaron estas relaciones hoy 12/09
-    //@ManyToOne(fetch=FetchType.LAZY, optional = false)
-    //@JoinColumn(name = "enterprise_id", referencedColumnName = "id", nullable = false)
-    // TODO: OK segun el video del 14/09/22
     @ManyToOne
     @JoinColumn(name = "enterprise")
     @JsonIgnore
     private Enterprise enterprise;
 
     @Enumerated(EnumType.STRING)
-    @Column(name="type", nullable = false)
+    @Column(nullable = false)
     private EnumTypeTransaction type;
 
-    @Temporal(TemporalType.DATE)
+    @CreationTimestamp
     @Column(nullable = false)
-    private Date createdAt;
+    private LocalDateTime createdAt;
 
-    @Temporal(TemporalType.DATE)
+    @UpdateTimestamp
     @Column(nullable = true)
-    private Date updatedAt;
+    private LocalDateTime updatedAt;
+
 }

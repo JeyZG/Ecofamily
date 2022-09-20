@@ -1,63 +1,59 @@
 package com.innovedcol.ecofamily.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.innovedcol.ecofamily.enums.EnumRoleEmployee;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.innovedcol.ecofamily.enums.RoleEmployeeEnum;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
-import java.util.*;
+import java.time.LocalDateTime;
+import java.util.List;
 
-@NoArgsConstructor
+@Entity
 @AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Setter
-@Entity
+@ToString
+@JsonIgnoreProperties(value= {"enterprise"})
 @Table(name = "EMPLOYEES")
 public class Employee {
 
-    // Atributos
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue (strategy = GenerationType.IDENTITY)
+    @Column(unique = true)
     private Long id;
 
-    @Column(nullable = false, unique = true)
+    @Column (nullable = false, length = 50)
     private String name;
 
-    @Column(nullable = false, unique = true)
+    @Column (nullable = false, length = 50, unique = true)
     private String email;
 
     @Column(nullable = false)
     private String phone;
 
     @Enumerated(EnumType.STRING)
-    @Column(name="role", nullable = false)
-    private EnumRoleEmployee role;
+    @Column (name="role", nullable = false)
+    private RoleEmployeeEnum role;
 
     @Column(nullable = false)
     private String image;
 
-    //@ManyToOne(fetch=FetchType.LAZY, optional = false)
-    //@JsonIgnore
-    // TODO: Se cambiaron estas relaciones hoy 12/09
-    // TODO: OK segun el video del 14/09/22
     @ManyToOne
     @JoinColumn(name = "enterprise")
-    @JsonIgnore
     private Enterprise enterprise;
 
-    // TODO: Se cambiaron estas relaciones hoy 12/09
-    //@OneToMany(mappedBy="employee", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    // TODO: OK segun el video del 14/09/22
     @OneToMany(mappedBy= "employee")
-    public Set<Transaction> transactions;
-    //private List<Transaction> transactions;
+    private List<Transaction> transactions;
 
-    @Temporal(TemporalType.DATE)
-    @Column(nullable = false)
-    private Date createdAt;
+    @CreationTimestamp
+    @Column (nullable = false)
+    private LocalDateTime createdAt;
 
-    @Temporal(TemporalType.DATE)
-    @Column(nullable = true)
-    private Date updatedAt;
+    @UpdateTimestamp
+    @Column (nullable = true)
+    private LocalDateTime updatedAt;
 
 }

@@ -1,17 +1,19 @@
 package com.innovedcol.ecofamily.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
-import java.util.*;
+import java.time.LocalDateTime;
+import java.util.List;
 
-
-@NoArgsConstructor
+@Entity
 @AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Setter
-@Entity
+@ToString
 @Table(name = "ENTERPRISES")
 public class Enterprise {
 
@@ -33,26 +35,20 @@ public class Enterprise {
     @Column(nullable = false)
     private String address;
 
-    // TODO: Se cambiaron estas relaciones hoy 12/09
-    //@OneToMany(mappedBy="enterprise", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    // TODO: OK segun el video del 14/09/22
     @OneToMany(mappedBy="enterprise")
-    @Column(name="employees")
-    public Set<Employee> employees;
+    @Column(name="employees", nullable = true)
+    private List<Employee> employees;
 
-    // TODO: Se cambiaron estas relaciones hoy 12/09
-    //@OneToMany(mappedBy="enterprise", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    // TODO: OK segun el video del 14/09/22
     @OneToMany(mappedBy="enterprise")
     @Column(name="transactions", nullable = true)
-    public Set<Transaction> transactions;
-    //private List<Transaction> transactions;
+    private List<Transaction> transactions;
 
-    @Temporal(TemporalType.DATE)
+    @CreationTimestamp
     @Column(nullable = false)
-    private Date createdAt;
+    private LocalDateTime createdAt;
 
-    @Temporal(TemporalType.DATE)
+    @UpdateTimestamp
     @Column(nullable = true)
-    private Date updatedAt;
+    private LocalDateTime updatedAt;
+
 }

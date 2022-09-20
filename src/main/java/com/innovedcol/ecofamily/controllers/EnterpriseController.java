@@ -2,49 +2,60 @@ package com.innovedcol.ecofamily.controllers;
 
 import com.innovedcol.ecofamily.entities.Enterprise;
 import com.innovedcol.ecofamily.services.EnterpriseService;
+import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.*;
-
+import java.util.List;
+import java.util.Optional;
 @RestController
+@AllArgsConstructor
 public class EnterpriseController {
 
-    // Declaramos un objeto de tipo EnterpriseService
-    private final EnterpriseService service;
+    //ATRIBUTOS
+    private final EnterpriseService enterpriseService;
 
-    // Constructor
-    public EnterpriseController(EnterpriseService service) {
-        this.service = service;
-    }
+    //MÉTODOS
 
-    // Método para llamar al servicio que muestra el listado de empresas
+    // Método para llamar al servicio que retorna el arraylist de todos los empleados:
     @GetMapping("/enterprises")
-    public ArrayList<Enterprise> EnterprisesList(){
-        return this.service.getEnterprisesList();
+    public List<?> EnterprisesList () {
+        return this.enterpriseService.getEnterprisesList();
     }
 
-    // Método para llamar al servicio que crea una nueva empresa
-    @PostMapping("/enterprises")
-    public String createEnterprise(@RequestBody Enterprise e){
-        return this.service.createEnterprise(e);
-    }
+    //CRUD:
 
-    // Método para llamar al servicio que busca una empresa según su id
-    @GetMapping("/enterprises/{id}")
+    // Buscar: Método para llamar al servicio que busca una empresa de acuerdo a su id:
+    @GetMapping("/enterprise/{id}")
     public Optional<Enterprise> searchEnterprise(@PathVariable("id") Long id){
-        return this.service.searchEnterprise(id);
+        return this.enterpriseService.searchEnterprise(id);
+    }
+    // Método para llamar al servicio que busca las transacciones de una empresa de acuerdo a su id:
+    @GetMapping("/enterprise/{id}/movements")
+    public List<?> searchTransactionsEnterprise(@PathVariable("id") Long id){
+        return this.enterpriseService.searchTransactionsEnterprise(id);
     }
 
-    // Método para llamar al servicio que actualiza la info de una empresa
-    @PutMapping("/enterprises/{id}")
-    public Enterprise updateEnterprise(@PathVariable("id") Long id, @RequestBody Enterprise e){
-        return this.service.updateEnterprise(id,e);
+    // Método para llamar al servicio que busca los empleados de una empresa de acuerdo a su id:
+    @GetMapping("/enterprise/{id}/users")
+    public List<?> searchEmployeesEnterprise(@PathVariable("id") Long id){
+        return this.enterpriseService.searchEmployeesEnterprise(id);
     }
 
-    // Método para llamar al servicio que eliminar una empresa
-    @DeleteMapping("/enterprises/{id}")
-    public String deleteEnterprise(@PathVariable("id") Long id){
-        return this.service.deleteEnterprise(id);
+    // Insertar: Método para llamar al servicio que crea una nueva empresa:
+    @PostMapping("/enterprises")
+    public String createEnterprise (@RequestBody Enterprise e) {
+        return this.enterpriseService.createEnterprise(e);
     }
+
+    // Actualizar: Método para llamar al servicio que actualiza la información de una empresa:
+    @PatchMapping("/enterprise/{id}")
+    public String updateEnterprise(@PathVariable("id") Long id, @RequestBody Enterprise e) {
+        return this.enterpriseService.updateEnterprise(id,e);
+    }
+
+    // Eliminar: Método para llamar al servicio que elimina una empresa:
+    @DeleteMapping("/enterprise/{id}")
+    public String deleteEnterprise(@PathVariable("id") Long id) {
+        return this.enterpriseService.deleteEnterprise(id); }
 
 }
