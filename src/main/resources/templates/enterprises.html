@@ -26,7 +26,7 @@
                 </div>
             </div>
             <div class="row container-fluid col-md-9 mx-auto justify-content-center border border-success border-2">
-                <table class="table table-hover border border-dark border-1 my-auto ">
+                <table class="table table-hover border border-dark border-1 my-auto mt-2">
                     <thead class="table-dark">
                     <tr>
                         <th scope="col">id</th>
@@ -41,16 +41,16 @@
                     </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>Innoved Col</td>
-                            <td>1143327635-8</td>
-                            <td>3017894562</td>
-                            <td>Cra 59D # 23 - 45</td>
-                            <td><a role="button" th:href="@{/users}">[Ver listado]</a></td>
-                            <td><a role="button" th:href="@{/transactions}">[Ver listado]</a></td>
-                            <td><a role="button" th:href="@{/enterprises}">✏</a></td>
-                            <td><a role="button" th:href="@{/enterprises}">❌</a></td>
+                        <tr th:each="empresa:${listaEmpresas}">
+                            <th scope="row" th:text="${empresa.id}"></th>
+                            <td th:text="${empresa.name}"></td>
+                            <td th:text="${empresa.document}"></td>
+                            <td th:text="${empresa.phone}"></td>
+                            <td th:text="${empresa.address}">Cra 59D # 23 - 45</td>
+                            <td><a role="button" th:href="@{/users}">[Ver listado]</a></td> <!-- TODO Pendiente por implementar -->
+                            <td><a role="button" th:href="@{/transactions}">[Ver listado]</a></td> <!-- TODO Pendiente por implementar -->
+                            <td><a role="button" th:href="@{/enterprises/update/{id}(id=${empresa.id})}">✏</a></td>
+                            <td><a role="button" th:href="@{/enterprises/delete/{id}(id=${empresa.id})}">❌</a></td>
                         </tr>
                     </tbody>
                 </table>

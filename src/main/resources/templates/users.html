@@ -26,7 +26,7 @@
                 </div>
             </div>
             <div class="row container-fluid col-md-9 mx-auto justify-content-center border border-success border-2">
-                <table class="table table-hover border border-dark border-1 my-auto ">
+                <table class="table table-hover border border-dark border-1 my-auto mt-2">
                     <thead class="table-dark">
                     <tr>
                         <th scope="col">id</th>
@@ -42,30 +42,19 @@
                     </thead>
                     <tbody>
                         <tr th:each="empleado:${listaEmpleados}">
-                            <th scope="row"></th>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                            <th scope="row" th:text="${empleado.id}"></th>
+                            <td th:text="${empleado.name}"></td>
+                            <td th:text="${empleado.email}"></td>
+                            <td th:text="${empleado.phone}"></td>
+                            <td th:text="${empleado.role}"></td>
+                            <td th:text="${empleado.enterprise.name}"></td>
                             <td><a role="button" th:href="@{/transactions}">[Ver listado]</a></td> <!-- TODO Pendiente por implementar -->
-                            <td><a role="button" th:href="@{/users}">✏</a></td>
-                            <td><a role="button" th:href="@{/users}">❌</a></td>
-                        </tr>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>Matthew Steven Zuñiga</td>
-                            <td>msz@mail.com</td>
-                            <td>3017558369</td>
-                            <td>Operario</td>
-                            <td>InnoveD Col</td>
-                            <td><a role="button" th:href="@{/transactions}">[Ver listado]</a></td>
-                            <td><a role="button" th:href="@{/users}">✏</a></td>
-                            <td><a role="button" th:href="@{/users}">❌</a></td>
+                            <td><a role="button" th:href="@{/users/update/{id}(id=${empleado.id})}">✏</a></td>
+                            <td><a role="button" th:href="@{/users/delete/{id}(id=${empleado.id})}">❌</a></td>
                         </tr>
                     </tbody>
                 </table>
-                <a th:href="@{#}" role="button" class="my-auto w-25 btn btn-outline-success">Nuevo usuario</a>
+                <a th:href="@{#}" role="button" class="my-3 w-25 btn btn-outline-success">Nuevo usuario</a>
             </div>
         </div>
     </div>
