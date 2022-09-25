@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
+import java.util.Locale;
 
 @Controller
 @AllArgsConstructor
@@ -21,24 +22,11 @@ public class TranFEController {
 
 
     @RequestMapping("/transactions")
-    public String transactionsIndex(Model model) {
+    public String transactionsIndex(Model model, Locale locale) {
         List<?> listaTransacciones = this.transactionService.getTransactionsList();
         model.addAttribute("listaTransacciones",listaTransacciones);
         return "transactions";
     }
 
-    @RequestMapping("/users")
-    public String usersIndex(Model model) {
-        List<?> listaEmpleados = this.employeeService.getEmployeesList();
-        model.addAttribute("listaEmpleados",listaEmpleados);
-        return "users";
-    }
-
-    @RequestMapping("/enterprises")
-    public String enterprisesIndex(Model model) {
-        List<?> listaEmpresas = this.enterpriseService.getEnterprisesList();
-        model.addAttribute("listaEmpresas",listaEmpresas);
-        return "enterprises";
-    }
 
 }

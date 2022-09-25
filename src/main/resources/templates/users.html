@@ -12,7 +12,7 @@
     <div class="container-fluid text-center">
         <div class="row g-0 text-center" >
             <div class="row container-fluid col-md-8 mx-auto justify-content-center ">
-                <img src="../images/general/logo_ecofamily.png" class="img-thumbnail my-3 w-25 border border-0" alt="Ecofamily" />
+                <img th:src="@{/images/general/logo_ecofamily.png}" class="img-thumbnail my-3 w-25 border border-0" alt="Ecofamily" />
                 <h1 class="display-1 mb-4 text-primary fw-bold">Usuarios</h1>
             </div>
         </div>
@@ -20,7 +20,7 @@
         <div class="row g-0 text-center" >
             <div class="col container-fluid col-md-2 mx-auto justify-content-center border border-dark border-2">
                 <div class="d-grid gap-2  justify-content-center col-5 my-auto mx-auto" >
-                    <a th:href="@{/index}" class="btn btn-success mt-3 my-2 btn-lg" role="button">Inicio</a>
+                    <a th:href="@{/}" class="btn btn-success mt-3 my-2 btn-lg" role="button">Inicio</a>
                     <a th:href="@{/transactions}" class="btn btn-primary my-2 btn-lg" role="button">Transacciones</a>
                     <a th:href="@{/enterprises}" class="btn btn-primary mb-3 my-2 btn-lg" role="button">Empresas</a>
                 </div>
@@ -49,12 +49,29 @@
                             <td th:text="${empleado.role}"></td>
                             <td th:text="${empleado.enterprise.name}"></td>
                             <td><a role="button" th:href="@{/transactions}">[Ver listado]</a></td> <!-- TODO Pendiente por implementar -->
-                            <td><a role="button" th:href="@{/users/update/{id}(id=${empleado.id})}">✏</a></td>
-                            <td><a role="button" th:href="@{/users/delete/{id}(id=${empleado.id})}">❌</a></td>
+                            <td><a role="button" th:href="@{/user/update/{id}(id=${empleado.id})}" th:title="'Modificar '+${empleado.name}">✏</a></td>
+                            <!--td><a role="button" th:href="@{/users/delete/{id}(id=${empleado.id})}" th:title="'Eliminar '+${empleado.name}">❌</a></td-->
+                            <td><a role="button" th:title="'Eliminar '+${empleado.name}" data-bs-toggle="modal" th:attr="data-bs-target=${'#staticBackdrop'+empleado.id}" data-row="${empleado}">❌</a></td>
                         </tr>
                     </tbody>
                 </table>
-                <a th:href="@{#}" role="button" class="my-3 w-25 btn btn-outline-success">Nuevo usuario</a>
+                <a th:href="@{/user/new}" role="button" class="my-3 w-25 btn btn-outline-success">Nuevo usuario</a>
+            </div>
+        </div>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" th:each="empleado : ${listaEmpleados}" th:attr="id=${'staticBackdrop' + empleado.id}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Eliminar empleado</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" th:text="'¿Realmente desea eliminar el empleado '+${empleado.name}+'?'"></div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                    <a role="button" class="btn btn-primary" th:href="@{/user/delete/{id}(id=${empleado.id})}">Si</a>
+                </div>
             </div>
         </div>
     </div>

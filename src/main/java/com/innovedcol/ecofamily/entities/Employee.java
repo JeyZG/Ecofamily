@@ -1,7 +1,7 @@
 package com.innovedcol.ecofamily.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.innovedcol.ecofamily.enums.RoleEmployeeEnum;
+import com.innovedcol.ecofamily.enums.EnumRoleEmployee;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -36,7 +36,7 @@ public class Employee {
 
     @Enumerated(EnumType.STRING)
     @Column (name="role", nullable = false)
-    private RoleEmployeeEnum role;
+    private EnumRoleEmployee role;
 
     @Column(nullable = false)
     private String image;

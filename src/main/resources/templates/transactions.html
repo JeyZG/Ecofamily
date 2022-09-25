@@ -12,7 +12,7 @@
     <div class="container-fluid text-center">
         <div class="row g-0 text-center" >
             <div class="row container-fluid col-md-8 mx-auto justify-content-center ">
-                <img src="../images/general/logo_ecofamily.png" class="img-thumbnail my-3 w-25 border border-0" alt="Ecofamily" />
+                <img th:src="@{/images/general/logo_ecofamily.png}" class="img-thumbnail my-3 w-25 border border-0" alt="Ecofamily" />
                 <h1 class="display-1 mb-4 text-primary fw-bold">Transacciones</h1>
             </div>
         </div>
@@ -20,7 +20,7 @@
         <div class="row g-0 text-center" >
             <div class="col container-fluid col-md-2 mx-auto justify-content-center border border-dark border-2">
                 <div class="d-grid gap-2 justify-content-center col-5 my-auto mx-auto" >
-                    <a th:href="@{/index}" class="btn btn-success mt-3 my-2 btn-lg" role="button">Inicio</a>
+                    <a th:href="@{/}" class="btn btn-success mt-3 my-2 btn-lg" role="button">Inicio</a>
                     <a th:href="@{/users}" class="btn btn-primary my-2 btn-lg" role="button">Usuarios</a>
                     <a th:href="@{/enterprises}" class="btn btn-primary mb-3 my-2 btn-lg" role="button">Empresas</a>
                 </div>
@@ -44,15 +44,33 @@
                             <th scope="row" th:text="${transaccion.id}"></th>
                             <td th:text="${transaccion.type}"></td>
                             <td th:text="${transaccion.concept}"></td>
-                            <td th:text="${transaccion.amount}"></td>
+                            <!--td th:text="'$'+${transaccion.amount}"></td-->
+                            <td th:text="${#numbers.formatCurrency(transaccion.amount   )}"></td>
                             <td th:text="${transaccion.employee.name}"></td>
                             <td th:text="${transaccion.enterprise.name}"></td>
-                            <td><a role="button" th:href="@{/transactions/update/{id}(id=${transaccion.id})}">✏</a></td>
-                            <td><a role="button" th:href="@{/transactions/delete/{id}(id=${transaccion.id})}">❌</a></td>
+                            <td><a role="button" th:href="@{/transactions/update/{id}(id=${transaccion.id})}" th:title="'Modificar transaccion '+${transaccion.id}">✏</a></td>
+                            <!--td><a role="button" th:href="@{/transactions/delete/{id}(id=${transaccion.id})}" th:title="'Eliminar transaccion '+${transaccion.id}">❌</a></td-->
+                            <td><a role="button" th:title="'Eliminar transaccion '+${transaccion.id}" data-bs-toggle="modal" th:attr="data-bs-target=${'#staticBackdrop'+transaccion.id}" data-row="${transaccion}">❌</a></td>
                         </tr>
                     </tbody>
                 </table>
-                <a th:href="@{#}" role="button" class="my-3 w-25 btn btn-outline-success">Nueva transaccion</a>
+                <a th:href="@{/transaction/new}" role="button" class="my-3 w-25 btn btn-outline-success">Nueva transaccion</a>
+            </div>
+        </div>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" th:each="transaccion : ${listaTransacciones}" th:attr="id=${'staticBackdrop' + transaccion.id}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Eliminar transaccion</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" th:text="'¿Realmente desea eliminar la transaccion con ID '+${transaccion.id}+'?'"></div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                    <a role="button" class="btn btn-primary" th:href="@{/transactions/delete/{id}(id=${transaccion.id})}">Si</a>
+                </div>
             </div>
         </div>
     </div>
