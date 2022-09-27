@@ -15,7 +15,7 @@ import java.util.List;
 @NoArgsConstructor
 @Getter
 @Setter
-@ToString
+//@ToString
 @JsonIgnoreProperties(value= {"enterprise"})
 @Table(name = "EMPLOYEES")
 public class Employee {
@@ -41,7 +41,7 @@ public class Employee {
     @Column(nullable = false)
     private String image;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "enterprise")
     private Enterprise enterprise;
 

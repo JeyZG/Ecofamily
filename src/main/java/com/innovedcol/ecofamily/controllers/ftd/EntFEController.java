@@ -1,9 +1,6 @@
 package com.innovedcol.ecofamily.controllers.ftd;
 
 import com.innovedcol.ecofamily.entities.Enterprise;
-import com.innovedcol.ecofamily.services.backend.EmployeeService;
-import com.innovedcol.ecofamily.services.backend.EnterpriseService;
-import com.innovedcol.ecofamily.services.backend.TransactionService;
 import com.innovedcol.ecofamily.services.frontend.EntFEService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -24,19 +21,22 @@ private final EntFEService enterpriseService;
         if (listaEmpresas.size()==1 && listaEmpresas.get(0).toString().equals("No existen empresas")){
             //attributes.addFlashAttribute("hayEmpresas",true);
             model.addAttribute("hayEmpresas",false);
-            //return "redirect:/";
         }else {
-            //attributes.addFlashAttribute("noHayEmpresas",true);
             model.addAttribute("hayEmpresas",true);
             model.addAttribute("listaEmpresas",listaEmpresas);
-            //return "enterprises";
         }
         return "enterprises";
     }
 
     @GetMapping("/enterprise/new")
     public String formNuevaEmpresa(Model model){
-        model.addAttribute("empresa",new Enterprise());
+        List<?> listaEmpresas = this.enterpriseService.getEnterprisesList();
+        if (listaEmpresas.size()>0 && !listaEmpresas.get(0).toString().equals("No existen empresas")){
+            model.addAttribute("hayEmpresas",true);
+        }else {
+            model.addAttribute("hayEmpresas",false);
+            model.addAttribute("empresa",new Enterprise());
+        }
         return "new_enterprise";
     }
 
@@ -49,7 +49,6 @@ private final EntFEService enterpriseService;
             attributes.addFlashAttribute("error",result);
         }
         return "redirect:/enterprise";
-        //return "enterprises";
     }
 
     @GetMapping("/enterprise/delete/{id}")

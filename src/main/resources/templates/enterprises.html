@@ -12,7 +12,7 @@
     <div class="container-fluid text-center">
         <div class="row g-0 text-center">
             <div class="row container-fluid col-md-8 mx-auto justify-content-center ">
-                <img th:src="@{/images/general/logo_ecofamily.png}" class="img-thumbnail my-3 w-25 border border-0" alt="Ecofamily" />
+                <img th:src="@{/images/general/logo_ecofamily.png}" src="" class="img-thumbnail my-3 w-25 border border-0" alt="Ecofamily" />
                 <h1 class="display-1 mb-4 text-primary fw-bold">Gestion de la empresa</h1>
             </div>
         </div>
@@ -24,8 +24,8 @@
                     <a th:href="@{/users}" class="btn btn-primary mb-3 my-2 btn-lg" role="button">Usuarios</a>
                 </div>
             </div>
-            <div class="row container-fluid col-md-9 mx-auto justify-content-center border border-success border-2">
-                <table class="table table-hover border border-dark border-1 my-auto mt-2" th:if="${hayEmpresas}">
+            <div class="row container-fluid col-md-9 mx-auto my-auto justify-content-center border border-success border-2">
+                <table class="table table-hover border border-dark border-1 my-auto mt-2 mb-2" th:if="${hayEmpresas==true}">
                     <thead class="table-dark">
                     <tr>
                         <th scope="col" class="d-none">id</th>
@@ -48,7 +48,7 @@
                             <td th:text="${empresa.address}"></td>
                             <!--td><a role="button" th:href="@{/users}">[Ver listado]</a></td>
                             <td><a role="button" th:href="@{/transactions}">[Ver listado]</a></td-->
-                            <td><a role="button" th:href="@{/enterprises/update/{id}(id=${empresa.id})}" th:title="'Modificar '+${empresa.name}">✏</a></td>
+                            <td><a role="button" th:href="@{/enterprises/update/{id}(id=${empresa.id})}" th:title="'Modificar '+${empresa.name}">✏</a></td>  <!-- TODO: Falta implementar-->
                             <td><a role="button" th:title="'Eliminar '+${empresa.name}" data-bs-toggle="modal" th:attr="data-bs-target=${'#staticBackdrop'+empresa.id}" data-row="${empresa}">❌</a></td>
                         </tr>
                     </tbody>

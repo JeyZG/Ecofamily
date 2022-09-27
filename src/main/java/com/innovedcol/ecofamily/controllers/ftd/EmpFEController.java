@@ -1,11 +1,10 @@
 package com.innovedcol.ecofamily.controllers.ftd;
 
 import com.innovedcol.ecofamily.entities.Employee;
-import com.innovedcol.ecofamily.entities.Enterprise;
+import com.innovedcol.ecofamily.entities.Transaction;
 import com.innovedcol.ecofamily.enums.EnumRoleEmployee;
-import com.innovedcol.ecofamily.services.backend.EmployeeService;
-import com.innovedcol.ecofamily.services.backend.EnterpriseService;
-import com.innovedcol.ecofamily.services.backend.TransactionService;
+import com.innovedcol.ecofamily.services.frontend.EmpFEService;
+import com.innovedcol.ecofamily.services.frontend.EntFEService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,8 +19,8 @@ import java.util.List;
 @AllArgsConstructor
 public class EmpFEController {
 
-    private final EmployeeService employeeService;
-    private final EnterpriseService enterpriseService;
+    private final EmpFEService employeeService;
+    private final EntFEService enterpriseService;
 
     @RequestMapping("/users")
     public String usersIndex(Model model) {
@@ -38,7 +37,7 @@ public class EmpFEController {
     @GetMapping("/user/new")
     public String formNuevoEmpleado(Model model){
         List<?> listaEmpresas = this.enterpriseService.getEnterprisesList();
-
+        List<EnumRoleEmployee> listaRoles = new ArrayList<EnumRoleEmployee>(Arrays.asList(EnumRoleEmployee.values()));
         if (listaEmpresas.size()==1 && listaEmpresas.get(0).toString().equals("No existen empresas")){
             model.addAttribute("hayEmpresas",false);
         }else {
@@ -46,7 +45,6 @@ public class EmpFEController {
             model.addAttribute("listaEmpresas",listaEmpresas);
         }
 
-        List<EnumRoleEmployee> listaRoles = new ArrayList<EnumRoleEmployee>(Arrays.asList(EnumRoleEmployee.values()));
         model.addAttribute("listaRoles",listaRoles);
         model.addAttribute("empleado",new Employee());
         return "new_user";
@@ -67,6 +65,19 @@ public class EmpFEController {
     public String deleteEmployee(@PathVariable("id") Long id) {
         this.employeeService.deleteEmployee(id);
         return "redirect:/users";
+    }
+
+    // Método para llamar al servicio que busca las transacciones de una empresa de acuerdo a su id:
+    @GetMapping("/user/{id}/movements")
+    public String searchTransactionsEmployee(@PathVariable("id") Long id, Model model){
+        List<?> transactions = this.employeeService.searchTransactionsEmployee(id);
+        if (transactions.size()==1 && transactions.get(0).toString().equals("Empleado no existe")){
+            model.addAttribute("userConTransacciones",false);
+        }else {
+            model.addAttribute("userConTransacciones",true);
+            model.addAttribute("listaTransaccionesUser", transactions);
+        }
+        return "user_transactions";
     }
 
 }

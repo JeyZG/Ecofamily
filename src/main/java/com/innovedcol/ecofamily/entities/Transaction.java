@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Getter
 @Setter
-@ToString
+//@ToString
 @Table(name = "TRANSACTIONS")
 public class Transaction {
 
@@ -30,12 +30,12 @@ public class Transaction {
     @Column(nullable = false)
     private double amount;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "employee")
     @JsonIgnore
     private Employee employee;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "enterprise")
     @JsonIgnore
     private Enterprise enterprise;
