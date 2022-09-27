@@ -22,19 +22,18 @@
                 <div class="d-grid gap-2  justify-content-center col-5 my-auto mx-auto" >
                     <a th:href="@{/}" class="btn btn-success mt-3 my-2 btn-lg" role="button">Inicio</a>
                     <a th:href="@{/transactions}" class="btn btn-primary my-2 btn-lg" role="button">Transacciones</a>
-                    <a th:href="@{/enterprises}" class="btn btn-primary mb-3 my-2 btn-lg" role="button">Empresas</a>
+                    <a th:href="@{/enterprise}" class="btn btn-primary mb-3 my-2 btn-lg" role="button">Empresas</a>
                 </div>
             </div>
             <div class="row container-fluid col-md-9 mx-auto justify-content-center border border-success border-2">
-                <table class="table table-hover border border-dark border-1 my-auto mt-2">
+                <table class="table table-hover border border-dark border-1 my-auto mt-2" th:if="${hayEmpleados}">
                     <thead class="table-dark">
                     <tr>
-                        <th scope="col">id</th>
+                        <th scope="col" class="d-none">id</th>
                         <th scope="col">Nombre</th>
                         <th scope="col">Email</th>
                         <th scope="col">Telefono</th>
                         <th scope="col">Rol</th>
-                        <th scope="col">Empresa</th>
                         <th scope="col">Transacciones</th>
                         <th scope="col"></th>
                         <th scope="col"></th>
@@ -42,12 +41,11 @@
                     </thead>
                     <tbody>
                         <tr th:each="empleado:${listaEmpleados}">
-                            <th scope="row" th:text="${empleado.id}"></th>
+                            <th scope="row" th:text="${empleado.id}" class="d-none"></th>
                             <td th:text="${empleado.name}"></td>
                             <td th:text="${empleado.email}"></td>
                             <td th:text="${empleado.phone}"></td>
                             <td th:text="${empleado.role}"></td>
-                            <td th:text="${empleado.enterprise.name}"></td>
                             <td><a role="button" th:href="@{/transactions}">[Ver listado]</a></td> <!-- TODO Pendiente por implementar -->
                             <td><a role="button" th:href="@{/user/update/{id}(id=${empleado.id})}" th:title="'Modificar '+${empleado.name}">✏</a></td>
                             <!--td><a role="button" th:href="@{/users/delete/{id}(id=${empleado.id})}" th:title="'Eliminar '+${empleado.name}">❌</a></td-->
@@ -55,7 +53,7 @@
                         </tr>
                     </tbody>
                 </table>
-                <a th:href="@{/user/new}" role="button" class="my-3 w-25 btn btn-outline-success">Nuevo usuario</a>
+                <a th:href="@{/user/new}" role="button" class="my-2 w-auto py-5 btn btn-outline-success">Nuevo usuario</a>
             </div>
         </div>
     </div>

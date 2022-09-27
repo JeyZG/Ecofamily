@@ -13,7 +13,7 @@
         <div class="row g-0 text-center">
             <div class="row container-fluid col-md-8 mx-auto justify-content-center ">
                 <img th:src="@{/images/general/logo_ecofamily.png}" class="img-thumbnail my-3 w-25 border border-0" alt="Ecofamily" />
-                <h1 class="display-1 mb-4 text-primary fw-bold">Empresas</h1>
+                <h1 class="display-1 mb-4 text-primary fw-bold">Gestion de la empresa</h1>
             </div>
         </div>
         <div class="row g-0 text-center">
@@ -21,39 +21,39 @@
                 <div class="d-grid gap-2  justify-content-center col-5 my-auto mx-auto" >
                     <a th:href="@{/}" class="btn btn-success mt-3 my-2 btn-lg" role="button">Inicio</a>
                     <a th:href="@{/transactions}" class="btn btn-primary my-2 btn-lg" role="button">Transacciones</a>
-                    <a th:href="@{/enterprises}" class="btn btn-primary mb-3 my-2 btn-lg" role="button">Empresas</a>
+                    <a th:href="@{/users}" class="btn btn-primary mb-3 my-2 btn-lg" role="button">Usuarios</a>
                 </div>
             </div>
             <div class="row container-fluid col-md-9 mx-auto justify-content-center border border-success border-2">
-                <table class="table table-hover border border-dark border-1 my-auto mt-2">
+                <table class="table table-hover border border-dark border-1 my-auto mt-2" th:if="${hayEmpresas}">
                     <thead class="table-dark">
                     <tr>
-                        <th scope="col">id</th>
+                        <th scope="col" class="d-none">id</th>
                         <th scope="col">Nombre</th>
                         <th scope="col">Documento</th>
                         <th scope="col">Telefono</th>
                         <th scope="col">Direccion</th>
-                        <th scope="col">Usuarios</th>
-                        <th scope="col">Transacciones</th>
+                        <!--th scope="col">Usuarios</th>
+                        <th scope="col">Transacciones</th-->
                         <th scope="col"></th>
                         <th scope="col"></th>
                     </tr>
                     </thead>
                     <tbody>
                         <tr th:each="empresa:${listaEmpresas}">
-                            <th scope="row" th:text="${empresa.id}"></th>
+                            <th scope="row" th:text="${empresa.id}" class="d-none"></th>
                             <td th:text="${empresa.name}"></td>
                             <td th:text="${empresa.document}"></td>
                             <td th:text="${empresa.phone}"></td>
                             <td th:text="${empresa.address}"></td>
-                            <td><a role="button" th:href="@{/users}">[Ver listado]</a></td> <!-- TODO Pendiente por implementar -->
-                            <td><a role="button" th:href="@{/transactions}">[Ver listado]</a></td> <!-- TODO Pendiente por implementar -->
+                            <!--td><a role="button" th:href="@{/users}">[Ver listado]</a></td>
+                            <td><a role="button" th:href="@{/transactions}">[Ver listado]</a></td-->
                             <td><a role="button" th:href="@{/enterprises/update/{id}(id=${empresa.id})}" th:title="'Modificar '+${empresa.name}">✏</a></td>
                             <td><a role="button" th:title="'Eliminar '+${empresa.name}" data-bs-toggle="modal" th:attr="data-bs-target=${'#staticBackdrop'+empresa.id}" data-row="${empresa}">❌</a></td>
                         </tr>
                     </tbody>
                 </table>
-                <a th:href="@{/enterprise/new}" role="button" class="my-3 w-25 btn btn-outline-success">Nueva empresa</a>
+                <a th:href="@{/enterprise/new}" role="button" class="my-2 w-auto py-5 btn btn-outline-success" th:if="${hayEmpresas==false}">Registrar empresa</a>
             </div>
         </div>
     </div>

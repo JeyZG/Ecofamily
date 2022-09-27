@@ -35,11 +35,11 @@ public class Enterprise {
     @Column(nullable = false)
     private String address;
 
-    @OneToMany(mappedBy="enterprise")
+    @OneToMany(mappedBy="enterprise", cascade = CascadeType.ALL)
     @Column(name="employees", nullable = true)
     private List<Employee> employees;
 
-    @OneToMany(mappedBy="enterprise")
+    @OneToMany(mappedBy="enterprise", cascade = CascadeType.ALL)
     @Column(name="transactions", nullable = true)
     private List<Transaction> transactions;
 

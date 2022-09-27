@@ -41,11 +41,11 @@ public class Employee {
     @Column(nullable = false)
     private String image;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "enterprise")
     private Enterprise enterprise;
 
-    @OneToMany(mappedBy= "employee")
+    @OneToMany(mappedBy= "employee",cascade = CascadeType.ALL)
     private List<Transaction> transactions;
 
     @CreationTimestamp

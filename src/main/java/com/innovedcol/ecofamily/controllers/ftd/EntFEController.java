@@ -18,10 +18,19 @@ import java.util.List;
 public class EntFEController {
 private final EntFEService enterpriseService;
 
-    @RequestMapping("/enterprises")
+    @RequestMapping("/enterprise")
     public String enterprisesIndex(Model model) {
         List<?> listaEmpresas = this.enterpriseService.getEnterprisesList();
-        model.addAttribute("listaEmpresas",listaEmpresas);
+        if (listaEmpresas.size()==1 && listaEmpresas.get(0).toString().equals("No existen empresas")){
+            //attributes.addFlashAttribute("hayEmpresas",true);
+            model.addAttribute("hayEmpresas",false);
+            //return "redirect:/";
+        }else {
+            //attributes.addFlashAttribute("noHayEmpresas",true);
+            model.addAttribute("hayEmpresas",true);
+            model.addAttribute("listaEmpresas",listaEmpresas);
+            //return "enterprises";
+        }
         return "enterprises";
     }
 
@@ -39,14 +48,14 @@ private final EntFEService enterpriseService;
         }else{
             attributes.addFlashAttribute("error",result);
         }
-        return "redirect:/enterprises";
+        return "redirect:/enterprise";
         //return "enterprises";
     }
 
     @GetMapping("/enterprise/delete/{id}")
     public String deleteEnterprise(@PathVariable("id") Long id) {
         this.enterpriseService.deleteEnterprise(id);
-        return "redirect:/enterprises";
+        return "redirect:/enterprise";
     }
 
 }

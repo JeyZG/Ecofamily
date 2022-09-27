@@ -30,12 +30,12 @@ public class Transaction {
     @Column(nullable = false)
     private double amount;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "employee")
     @JsonIgnore
     private Employee employee;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "enterprise")
     @JsonIgnore
     private Enterprise enterprise;

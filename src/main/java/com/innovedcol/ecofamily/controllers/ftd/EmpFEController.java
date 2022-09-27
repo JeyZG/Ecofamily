@@ -26,15 +26,27 @@ public class EmpFEController {
     @RequestMapping("/users")
     public String usersIndex(Model model) {
         List<?> listaEmpleados = this.employeeService.getEmployeesList();
-        model.addAttribute("listaEmpleados",listaEmpleados);
+        if (listaEmpleados.size()==1 && listaEmpleados.get(0).toString().equals("No existen empleados")){
+            model.addAttribute("hayEmpleados",false);
+        }else {
+            model.addAttribute("hayEmpleados",true);
+            model.addAttribute("listaEmpleados", listaEmpleados);
+        }
         return "users";
     }
 
     @GetMapping("/user/new")
     public String formNuevoEmpleado(Model model){
         List<?> listaEmpresas = this.enterpriseService.getEnterprisesList();
+
+        if (listaEmpresas.size()==1 && listaEmpresas.get(0).toString().equals("No existen empresas")){
+            model.addAttribute("hayEmpresas",false);
+        }else {
+            model.addAttribute("hayEmpresas",true);
+            model.addAttribute("listaEmpresas",listaEmpresas);
+        }
+
         List<EnumRoleEmployee> listaRoles = new ArrayList<EnumRoleEmployee>(Arrays.asList(EnumRoleEmployee.values()));
-        model.addAttribute("listaEmpresas",listaEmpresas);
         model.addAttribute("listaRoles",listaRoles);
         model.addAttribute("empleado",new Employee());
         return "new_user";
